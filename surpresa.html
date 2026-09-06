@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A última surpresa ♡</title>
+
+<style>
+
+/* =====================================================
+   FONTES
+===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@300;400;500;600&display=swap');
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+
+    font-family: 'Montserrat', sans-serif;
+
+    color: #59464b;
+
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.8), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(244,202,211,.35), transparent 35%),
+        #f8eeee;
+}
+
+
+/* =====================================================
+   CORAÇÕES DE FUNDO
+===================================================== */
+
+.hearts {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    color: rgba(190, 125, 140, .18);
+    font-size: 18px;
+    animation: floatHeart linear infinite;
+}
+
+.heart:nth-child(1) {
+    left: 8%;
+    animation-duration: 12s;
+    font-size: 15px;
+}
+
+.heart:nth-child(2) {
+    left: 22%;
+    animation-duration: 15s;
+    animation-delay: 3s;
+}
+
+.heart:nth-child(3) {
+    left: 45%;
+    animation-duration: 13s;
+    animation-delay: 1s;
+}
+
+.heart:nth-child(4) {
+    left: 68%;
+    animation-duration: 17s;
+    animation-delay: 4s;
+}
+
+.heart:nth-child(5) {
+    left: 87%;
+    animation-duration: 14s;
+    animation-delay: 2s;
+}
+
+@keyframes floatHeart {
+
+    from {
+        transform: translateY(110vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-20vh) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   TELA PRINCIPAL
+===================================================== */
+
+.password-screen {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    z-index: 20;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.password-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   CARTÃO
+===================================================== */
+
+.password-card {
+
+    width: min(92%, 520px);
+
+    padding: 48px 38px;
+
+    text-align: center;
+
+    background: rgba(255, 250, 250, .88);
+
+    border: 1px solid #e7cdd3;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 20px 50px rgba(121, 75, 85, .10),
+        inset 0 0 0 5px rgba(255,255,255,.35);
+
+    position: relative;
+
+    animation: cardAppear 1.2s ease;
+}
+
+.password-card::before,
+.password-card::after {
+
+    content: "♡";
+
+    position: absolute;
+
+    color: #d19ca8;
+
+    font-size: 18px;
+}
+
+.password-card::before {
+    top: 18px;
+    left: 22px;
+}
+
+.password-card::after {
+    bottom: 18px;
+    right: 22px;
+}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =====================================================
+   ÍCONE
+===================================================== */
+
+.lock {
+
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f4dfe4;
+
+    border: 1px solid #dfbbc4;
+
+    font-size: 26px;
+
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+
+/* =====================================================
+   TEXTOS
+===================================================== */
+
+.eyebrow {
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 3px;
+
+    color: #ae858f;
+
+    margin-bottom: 14px;
+}
+
+.password-card h1 {
+
+    font-family: 'DM Serif Display', serif;
+
+    font-size: clamp(31px, 7vw, 45px);
+
+    font-weight: normal;
+
+    line-height: 1.15;
+
+    color: #513f44;
+
+    margin-bottom: 18px;
+}
+
+.subtitle {
+
+    max-width: 370px;
+
+    margin: auto;
+
+    font-size: 13px;
+
+    line-height: 1.9;
+
+    color: #8b777c;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.input-area {
+
+    margin-top: 30px;
+}
+
+input {
+
+    width: 100%;
+
+    padding: 15px 18px;
+
+    border-radius: 30px;
+
+    border: 1px solid #dfc3ca;
+
+    background: #fffafa;
+
+    color: #59464b;
+
+    text-align: center;
+
+    outline: none;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 14px;
+
+    transition: .3s;
+}
+
+input:focus {
+
+    border-color: #c894a1;
+
+    box-shadow:
+        0 0 0 4px rgba(201,148,161,.10);
+}
+
+input::placeholder {
+    color: #b6a3a7;
+}
+
+
+/* =====================================================
+   BOTÃO
+===================================================== */
+
+.unlock-btn {
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 15px;
+
+    border-radius: 30px;
+
+    border: 1px solid #c995a1;
+
+    background: #f2dce1;
+
+    color: #654d53;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.unlock-btn:hover {
+
+    background: #e8c8cf;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(130,80,90,.10);
+}
+
+
+/* =====================================================
+   MENSAGENS / DICAS
+===================================================== */
+
+.message {
+
+    min-height: 22px;
+
+    margin-top: 17px;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    color: #9b747d;
+
+    opacity: 0;
+
+    transition: .5s;
+}
+
+.message.show {
+    opacity: 1;
+}
+
+.hint {
+
+    margin-top: 7px;
+
+    font-family: 'DM Serif Display', serif;
+
+    font-size: 15px;
+
+    color: #9b6874;
+
+    opacity: 0;
+
+    transform: translateY(5px);
+
+    transition: .5s;
+}
+
+.hint.show {
+
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   TRANSIÇÃO
+===================================================== */
+
+.transition {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: #f8eeee;
+
+    z-index: 100;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: opacity 1.2s ease;
+}
+
+.transition.active {
+    opacity: 1;
+}
+
+
+/* =====================================================
+   SEGUNDA SENHA
+===================================================== */
+
+.second-password {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    z-index: 10;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.second-password.active {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.second-card {
+
+    width: min(92%, 520px);
+
+    padding: 48px 38px;
+
+    text-align: center;
+
+    background: rgba(255,250,250,.9);
+
+    border: 1px solid #e7cdd3;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 20px 50px rgba(121,75,85,.10);
+
+    animation: cardAppear 1.2s ease;
+}
+
+.second-icon {
+
+    font-size: 27px;
+
+    color: #b77d89;
+
+    margin-bottom: 22px;
+}
+
+.second-card h2 {
+
+    font-family: 'DM Serif Display', serif;
+
+    font-size: clamp(31px, 7vw, 46px);
+
+    font-weight: normal;
+
+    color: #513f44;
+
+    line-height: 1.15;
+
+    margin-bottom: 17px;
+}
+
+.second-card p {
+
+    font-size: 13px;
+
+    color: #8b777c;
+
+    line-height: 1.9;
+}
+
+
+/* =====================================================
+   GALERIA
+===================================================== */
+
+.gallery {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(circle at center,
+        #fff8f8 0%,
+        #f6e7ea 55%,
+        #eed7dd 100%);
+
+    z-index: 50;
+
+    overflow: hidden;
+}
+
+.gallery.active {
+    display: flex;
+}
+
+.gallery::before {
+
+    content: "♡";
+
+    position: absolute;
+
+    top: 8%;
+
+    left: 8%;
+
+    font-size: 80px;
+
+    color: rgba(183,125,137,.08);
+
+    transform: rotate(-15deg);
+}
+
+.gallery::after {
+
+    content: "♡";
+
+    position: absolute;
+
+    bottom: 8%;
+
+    right: 8%;
+
+    font-size: 90px;
+
+    color: rgba(183,125,137,.08);
+
+    transform: rotate(15deg);
+}
+
+
+/* =====================================================
+   FOTO
+===================================================== */
+
+.photo {
+
+    position: absolute;
+
+    width: min(84vw, 620px);
+
+    height: min(74vh, 730px);
+
+    object-fit: contain;
+
+    opacity: 0;
+
+    transform: scale(.97);
+
+    filter:
+        drop-shadow(0 18px 30px rgba(90,55,65,.18));
+
+    transition:
+        opacity 1.4s ease,
+        transform 3.5s ease;
+}
+
+.photo.show {
+
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+.photo.hide {
+
+    opacity: 0;
+
+    transform: scale(.985);
+}
+
+
+/* =====================================================
+   TEXTO DA GALERIA
+===================================================== */
+
+.gallery-text {
+
+    position: absolute;
+
+    bottom: 67px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-family: 'DM Serif Display', serif;
+
+    font-size: 18px;
+
+    color: #70545b;
+
+    white-space: nowrap;
+
+    z-index: 5;
+
+    opacity: 0;
+
+    animation: textAppear 1.5s ease forwards;
+}
+
+@keyframes textAppear {
+
+    from {
+        opacity: 0;
+        transform: translate(-50%, 10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+
+/* =====================================================
+   CONTADOR
+===================================================== */
+
+.photo-number {
+
+    position: absolute;
+
+    bottom: 31px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    color: #a8878e;
+
+    z-index: 5;
+}
+
+
+/* =====================================================
+   TELA FINAL
+===================================================== */
+
+.final-screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.8), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(244,202,211,.4), transparent 35%),
+        #f8eeee;
+
+    z-index: 70;
+}
+
+.final-screen.active {
+
+    display: flex;
+
+    animation: finalAppear 1.8s ease;
+}
+
+@keyframes finalAppear {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.final-card {
+
+    width: min(92%, 550px);
+
+    padding: 50px 35px;
+
+    background: rgba(255,250,250,.9);
+
+    border: 1px solid #e7cdd3;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 20px 50px rgba(121,75,85,.10);
+}
+
+.final-heart {
+
+    font-size: 28px;
+
+    color: #bd7e8b;
+
+    margin-bottom: 20px;
+}
+
+.final-card h2 {
+
+    font-family: 'DM Serif Display', serif;
+
+    font-size: clamp(34px, 8vw, 53px);
+
+    font-weight: normal;
+
+    color: #513f44;
+
+    margin-bottom: 20px;
+}
+
+.final-card p {
+
+    max-width: 440px;
+
+    margin: auto;
+
+    color: #806d72;
+
+    font-size: 13px;
+
+    line-height: 1.9;
+}
+
+.final-btn {
+
+    display: inline-block;
+
+    margin-top: 30px;
+
+    padding: 14px 28px;
+
+    border-radius: 30px;
+
+    border: 1px solid #c995a1;
+
+    background: #f2dce1;
+
+    color: #654d53;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    transition: .3s;
+}
+
+.final-btn:hover {
+
+    background: #e8c8cf;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .password-card,
+    .second-card,
+    .final-card {
+
+        padding: 38px 23px;
+    }
+
+    .password-card h1,
+    .second-card h2 {
+
+        font-size: 32px;
+    }
+
+    .gallery-text {
+
+        font-size: 15px;
+
+        bottom: 65px;
+    }
+
+    .photo-number {
+
+        bottom: 28px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     CORAÇÕES
+===================================================== -->
+
+<div class="hearts">
+
+    <span class="heart">♡</span>
+    <span class="heart">♡</span>
+    <span class="heart">♡</span>
+    <span class="heart">♡</span>
+    <span class="heart">♡</span>
+
+</div>
+
+
+<!-- =====================================================
+     PRIMEIRA SENHA
+===================================================== -->
+
+<section class="password-screen" id="firstScreen">
+
+    <div class="password-card">
+
+        <div class="lock">
+            🔒
+        </div>
+
+        <div class="eyebrow">
+            último segredo
+        </div>
+
+        <h1>
+            Você chegou até o último segredo...
+        </h1>
+
+        <p class="subtitle">
+            Algumas coisas não podem ser abertas
+            por qualquer pessoa.
+        </p>
+
+
+        <div class="input-area">
+
+            <input
+                type="text"
+                id="firstInput"
+                placeholder="Digite a senha"
+                autocomplete="off"
+            >
+
+            <button
+                class="unlock-btn"
+                onclick="checkFirstPassword()"
+            >
+                Desbloquear ♡
+            </button>
+
+
+            <div
+                class="message"
+                id="firstMessage"
+            ></div>
+
+            <div
+                class="hint"
+                id="firstHint"
+            ></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TRANSIÇÃO
+===================================================== -->
+
+<div
+    class="transition"
+    id="transition"
+></div>
+
+
+<!-- =====================================================
+     SEGUNDA SENHA
+===================================================== -->
+
+<section
+    class="second-password"
+    id="secondScreen"
+>
+
+    <div class="second-card">
+
+        <div class="second-icon">
+            ♡
+        </div>
+
+        <div class="eyebrow">
+            primeira porta desbloqueada
+        </div>
+
+        <h2>
+            Ainda existe mais uma...
+        </h2>
+
+        <p>
+            Você conseguiu passar pela primeira.
+            <br>
+            Mas ainda existe um último segredo
+            esperando por você.
+        </p>
+
+
+        <div class="input-area">
+
+            <input
+                type="text"
+                id="secondInput"
+                placeholder="Digite a segunda senha"
+                autocomplete="off"
+            >
+
+            <button
+                class="unlock-btn"
+                onclick="checkSecondPassword()"
+            >
+                Desbloquear ♡
+            </button>
+
+
+            <div
+                class="message"
+                id="secondMessage"
+            ></div>
+
+            <div
+                class="hint"
+                id="secondHint"
+            ></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALERIA
+===================================================== -->
+
+<section
+    class="gallery"
+    id="gallery"
+>
+
+    <img
+        class="photo"
+        id="photo"
+        src="img/surpresa1.jpg"
+        alt="Um momento especial"
+    >
+
+    <div
+        class="gallery-text"
+        id="galleryText"
+    >
+        alguns dos nossos momentos ♡
+    </div>
+
+    <div
+        class="photo-number"
+        id="photoNumber"
+    >
+        01 / 07
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL
+===================================================== -->
+
+<section
+    class="final-screen"
+    id="finalScreen"
+>
+
+    <div class="final-card">
+
+        <div class="final-heart">
+            ♡
+        </div>
+
+        <h2>
+            Você conseguiu.
+        </h2>
+
+        <p>
+            E essas são apenas algumas das memórias
+            que fazem parte da nossa história.
+            <br><br>
+            Ainda temos muito para viver,
+            muitos lugares para conhecer
+            e muitos momentos para guardar.
+        </p>
+
+        <a
+            href="final.html"
+            class="final-btn"
+        >
+            continuar → ♡
+        </a>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   SENHAS
+===================================================== */
+
+const FIRST_PASSWORD = "24/04";
+
+const SECOND_PASSWORD = "posso falar agora?";
+
+
+/* =====================================================
+   PRIMEIRA SENHA
+===================================================== */
+
+let firstAttempts = 0;
+
+
+function checkFirstPassword() {
+
+    const input =
+        document
+        .getElementById("firstInput")
+        .value
+        .trim();
+
+
+    const message =
+        document
+        .getElementById("firstMessage");
+
+
+    const hint =
+        document
+        .getElementById("firstHint");
+
+
+    /* SENHA CORRETA */
+
+    if (input === FIRST_PASSWORD) {
+
+        message.classList.remove("show");
+
+        hint.classList.remove("show");
+
+        unlockFirstDoor();
+
+        return;
+    }
+
+
+    /* ERRO */
+
+    firstAttempts++;
+
+
+    message.textContent =
+        "Hmm... acho que você sabe a senha. Tenta de novo. ♡";
+
+    message.classList.add("show");
+
+
+    /* PRIMEIRA DICA */
+
+    if (firstAttempts === 1) {
+
+        hint.textContent =
+            "💡 Dica: é uma data...";
+
+        hint.classList.add("show");
+
+    }
+
+
+    /* SEGUNDA DICA */
+
+    else if (firstAttempts >= 2) {
+
+        hint.textContent =
+            "💭 Dica: quando chegaremos à nossa vocação...";
+
+        hint.classList.add("show");
+
+    }
+
+}
+
+
+/* =====================================================
+   ENTER — PRIMEIRA SENHA
+===================================================== */
+
+document
+    .getElementById("firstInput")
+    .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+            checkFirstPassword();
+
+        }
+
+    });
+
+
+/* =====================================================
+   PRIMEIRA PORTA
+===================================================== */
+
+function unlockFirstDoor() {
+
+    const transition =
+        document.getElementById("transition");
+
+    const firstScreen =
+        document.getElementById("firstScreen");
+
+    const secondScreen =
+        document.getElementById("secondScreen");
+
+
+    transition.classList.add("active");
+
+
+    setTimeout(() => {
+
+        firstScreen.classList.add("hidden");
+
+    }, 700);
+
+
+    setTimeout(() => {
+
+        secondScreen.classList.add("active");
+
+    }, 1200);
+
+
+    setTimeout(() => {
+
+        transition.classList.remove("active");
+
+    }, 1900);
+
+}
+
+
+/* =====================================================
+   SEGUNDA SENHA
+===================================================== */
+
+let secondAttempts = 0;
+
+
+function checkSecondPassword() {
+
+    const input =
+        document
+        .getElementById("secondInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const message =
+        document
+        .getElementById("secondMessage");
+
+
+    const hint =
+        document
+        .getElementById("secondHint");
+
+
+    /* SENHA CORRETA */
+
+    if (input === SECOND_PASSWORD) {
+
+        message.classList.remove("show");
+
+        hint.classList.remove("show");
+
+        unlockFinal();
+
+        return;
+    }
+
+
+    /* ERRO */
+
+    secondAttempts++;
+
+
+    message.textContent =
+        "Quase... essa você também sabe. ♡";
+
+    message.classList.add("show");
+
+
+    /* PRIMEIRA DICA */
+
+    if (secondAttempts === 1) {
+
+        hint.textContent =
+            "💡 Dica: começa com \"posso\"...";
+
+        hint.classList.add("show");
+
+    }
+
+
+    /* SEGUNDA DICA — CORRIGIDA */
+
+    else if (secondAttempts >= 2) {
+
+        hint.textContent =
+            "💭 Segunda dica: você falava muito antes, até tinha figurinha... ♡";
+
+        hint.classList.add("show");
+
+    }
+
+}
+
+
+/* =====================================================
+   ENTER — SEGUNDA SENHA
+===================================================== */
+
+document
+    .getElementById("secondInput")
+    .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+            checkSecondPassword();
+
+        }
+
+    });
+
+
+/* =====================================================
+   DESBLOQUEAR GALERIA
+===================================================== */
+
+function unlockFinal() {
+
+    const secondScreen =
+        document.getElementById("secondScreen");
+
+    const transition =
+        document.getElementById("transition");
+
+    const gallery =
+        document.getElementById("gallery");
+
+
+    transition.classList.add("active");
+
+
+    setTimeout(() => {
+
+        secondScreen.classList.remove("active");
+
+    }, 700);
+
+
+    setTimeout(() => {
+
+        gallery.classList.add("active");
+
+        startGallery();
+
+    }, 1300);
+
+
+    setTimeout(() => {
+
+        transition.classList.remove("active");
+
+    }, 2100);
+
+}
+
+
+/* =====================================================
+   FOTOS
+===================================================== */
+
+const photos = [
+
+    "img/surpresa1.jpg",
+
+    "img/surpresa2.jpg",
+
+    "img/surpresa3.jpg",
+
+    "img/surpresa4.jpg",
+
+    "img/surpresa5.jpg",
+
+    "img/surpresa6.jpg",
+
+    "img/surpresa7.jpg"
+
+];
+
+
+const captions = [
+
+    "alguns dos nossos momentos ♡",
+
+    "momentos que ficaram guardados ♡",
+
+    "um pedacinho da nossa história",
+
+    "mais uma memória para guardar ♡",
+
+    "e ainda tem muito pela frente...",
+
+    "mais um momento nosso ♡",
+
+    "e esse foi só o começo..."
+
+];
+
+
+let currentPhoto = 0;
+
+
+const photoElement =
+    document.getElementById("photo");
+
+
+const photoNumber =
+    document.getElementById("photoNumber");
+
+
+const galleryText =
+    document.getElementById("galleryText");
+
+
+/* =====================================================
+   INICIAR GALERIA
+===================================================== */
+
+function startGallery() {
+
+    currentPhoto = 0;
+
+
+    photoElement.src =
+        photos[currentPhoto];
+
+
+    photoNumber.textContent =
+        "01 / " +
+        String(photos.length).padStart(2, "0");
+
+
+    galleryText.textContent =
+        captions[currentPhoto];
+
+
+    setTimeout(() => {
+
+        photoElement.classList.add("show");
+
+    }, 300);
+
+
+    setTimeout(nextPhoto, 5500);
+
+}
+
+
+/* =====================================================
+   PRÓXIMA FOTO
+===================================================== */
+
+function nextPhoto() {
+
+    photoElement.classList.remove("show");
+
+    photoElement.classList.add("hide");
+
+
+    setTimeout(() => {
+
+        currentPhoto++;
+
+
+        /* TERMINOU */
+
+        if (currentPhoto >= photos.length) {
+
+            finishGallery();
+
+            return;
+        }
+
+
+        photoElement.src =
+            photos[currentPhoto];
+
+
+        photoNumber.textContent =
+
+            String(currentPhoto + 1)
+            .padStart(2, "0")
+
+            + " / " +
+
+            String(photos.length)
+            .padStart(2, "0");
+
+
+        galleryText.textContent =
+            captions[currentPhoto];
+
+
+        photoElement.classList.remove("hide");
+
+
+        setTimeout(() => {
+
+            photoElement.classList.add("show");
+
+        }, 100);
+
+
+        setTimeout(nextPhoto, 5500);
+
+    }, 1200);
+
+}
+
+
+/* =====================================================
+   FINAL DA GALERIA
+===================================================== */
+
+function finishGallery() {
+
+    const gallery =
+        document.getElementById("gallery");
+
+
+    const finalScreen =
+        document.getElementById("finalScreen");
+
+
+    gallery.classList.remove("active");
+
+
+    setTimeout(() => {
+
+        finalScreen.classList.add("active");
+
+    }, 1000);
+
+}
+
+</script>
+
+</body>
+</html>

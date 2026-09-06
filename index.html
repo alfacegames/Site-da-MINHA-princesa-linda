@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Para nós ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Georgia, 'Times New Roman', serif;
+            background: linear-gradient(135deg, #fff1f3, #fce4ec, #fff7f8);
+            display: flex;
+            flex-direction: column; /* Organiza para o scroll funcionar direito */
+            overflow-x: hidden; /* Esconde apenas a rolagem horizontal indesejada */
+            color: #5c3038;
+        }
+
+        /* Container padrão usado para ambas as telas */
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+            animation: aparecer 1.5s ease;
+            position: relative;
+            z-index: 2;
+            margin: auto; /* Centraliza tudo perfeitamente */
+            padding: 50px 0; /* Dá um espaço em cima e embaixo para você poder rolar */
+        }
+
+        .pequeno {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #a75d69;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-size: clamp(38px, 7vw, 70px);
+            font-weight: normal;
+            margin-bottom: 20px;
+            color: #7c3f49;
+        }
+
+        .meses {
+            font-size: clamp(21px, 4vw, 30px);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .tempo {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            color: #8d6269;
+            margin-bottom: 40px;
+        }
+
+        .coracao {
+            font-size: 35px;
+            margin-bottom: 20px;
+            animation: pulsar 1.5s infinite;
+        }
+
+        .botao {
+            display: inline-block;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            background: #9d5360;
+            color: white;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 25px rgba(125, 57, 70, 0.20);
+        }
+
+        .botao:hover {
+            transform: translateY(-3px);
+            background: #853f4c;
+            box-shadow: 0 12px 30px rgba(125, 57, 70, 0.30);
+        }
+
+        /* ==========================================
+           ESTILOS DO TIMER E FOTO ADICIONADOS
+        ========================================== */
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            min-width: 80px;
+            padding: 15px 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(157, 83, 96, 0.2);
+            border-radius: 15px;
+        }
+
+        .time-number {
+            display: block;
+            font-size: 32px;
+            color: #7c3f49;
+            margin-bottom: 5px;
+        }
+
+        .time-label {
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #a75d69;
+        }
+
+        .foto-revelada {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(125, 57, 70, 0.15);
+            margin-bottom: 30px;
+            object-fit: cover;
+        }
+
+        /* Controle de visibilidade e transição */
+        #content {
+            display: none;
+            opacity: 0;
+        }
+
+        .mostrar-conteudo {
+            display: block !important;
+            animation: aparecer 2s ease forwards;
+        }
+
+        .esconder-tela {
+            opacity: 0;
+            transform: scale(1.05);
+            pointer-events: none;
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .transition-overlay {
+            position: fixed;
+            inset: 0;
+            background: #fff1f3;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.2s ease;
+        }
+
+        .transition-overlay.active {
+            opacity: 1;
+        }
+
+        /* Corações no fundo */
+        .heart {
+            position: absolute;
+            color: rgba(157, 83, 96, 0.18);
+            font-size: 20px;
+            animation: subir linear infinite;
+            bottom: -50px;
+            z-index: 1;
+        }
+
+        .heart:nth-child(1) { left: 10%; animation-duration: 8s; font-size: 18px; }
+        .heart:nth-child(2) { left: 25%; animation-duration: 11s; animation-delay: 2s; font-size: 25px; }
+        .heart:nth-child(3) { left: 45%; animation-duration: 9s; animation-delay: 1s; font-size: 16px; }
+        .heart:nth-child(4) { left: 65%; animation-duration: 12s; animation-delay: 3s; font-size: 23px; }
+        .heart:nth-child(5) { left: 82%; animation-duration: 10s; animation-delay: 1s; font-size: 19px; }
+
+        @keyframes subir {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            15% { opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(30deg); opacity: 0; }
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulsar {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        @media (max-width: 600px) {
+            .container { width: 85%; }
+            .tempo { line-height: 1.6; }
+            .botao { padding: 14px 25px; }
+            .time-box { min-width: 70px; padding: 12px 8px; }
+            .time-number { font-size: 26px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Corações de fundo -->
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+
+    <!-- Tela de Transição -->
+    <div class="transition-overlay" id="transitionOverlay"></div>
+
+    <!-- ==========================================
+         TELA 1: BLOQUEADA (TIMER)
+    ========================================== -->
+    <section class="container" id="lockScreen">
+        
+        <div class="pequeno">uma pequena surpresa</div>
+        
+        <div class="coracao">♡</div>
+        
+        <h1>Ainda não pode ver...</h1>
+        
+        <p class="tempo" style="margin-bottom: 10px;">
+            Algumas coisas precisam esperar o momento certo.
+        </p>
+
+        <!-- Contador -->
+        <div class="countdown" id="countdown">
+            <div class="time-box">
+                <span class="time-number" id="days">00</span>
+                <span class="time-label">dias</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="hours">00</span>
+                <span class="time-label">horas</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="minutes">00</span>
+                <span class="time-label">min</span>
+            </div>
+            <div class="time-box">
+                <span class="time-number" id="seconds">00</span>
+                <span class="time-label">seg</span>
+            </div>
+        </div>
+
+        <p class="pequeno" id="waitingText">
+            esperando pelo nosso dia...
+        </p>
+
+        <!-- Botão que aparece quando o timer zera -->
+        <div id="unlockArea" style="display: none; margin-top: 30px;">
+            <button class="botao" id="unlockButton">Liberar nosso segredo ♡</button>
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         TELA 2: CONTEÚDO REVELADO
+    ========================================== -->
+    <main class="container" id="content">
+
+        <!-- FOTO ADICIONADA AQUI -->
+        <img src="img/lindona.jpg" alt="Uma memória nossa" class="foto-revelada">
+
+        <div class="pequeno">
+            finalmente chegou o momento
+        </div>
+
+        <h1>Feliz 6 meses de namoro!</h1>
+
+        <p class="meses">
+            E feliz <strong>9 meses e 18 dias</strong><br>
+            desde que começamos a nos falar.
+        </p>
+
+        <p class="tempo">
+            Parece que foi ontem que tudo começou...
+        </p>
+
+        <a href="inicio.html" class="botao">
+            Onde tudo começou ♥
+        </a>
+
+    </main>
+
+
+    <script>
+        /* ==========================================
+           DATA DO DESBLOQUEIO
+           Coloque a data e hora desejada abaixo.
+        ========================================== */
+        const unlockDate = new Date("2026-09-08T00:00:00-03:00");
+
+        /* ==========================================
+           ELEMENTOS
+        ========================================== */
+        const lockScreen = document.getElementById("lockScreen");
+        const content = document.getElementById("content");
+        const transitionOverlay = document.getElementById("transitionOverlay");
+        
+        const countdown = document.getElementById("countdown");
+        const waitingText = document.getElementById("waitingText");
+        const unlockArea = document.getElementById("unlockArea");
+        const unlockButton = document.getElementById("unlockButton");
+
+        let timer;
+        let unlocked = false;
+
+        /* ==========================================
+           LÓGICA DO TIMER
+        ========================================== */
+        function updateCountdown() {
+            const now = new Date();
+            const difference = unlockDate.getTime() - now.getTime();
+
+            if (difference > 0) {
+                const totalSeconds = Math.floor(difference / 1000);
+                
+                document.getElementById("days").textContent = String(Math.floor(totalSeconds / 86400)).padStart(2, "0");
+                document.getElementById("hours").textContent = String(Math.floor((totalSeconds % 86400) / 3600)).padStart(2, "0");
+                document.getElementById("minutes").textContent = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+                document.getElementById("seconds").textContent = String(totalSeconds % 60).padStart(2, "0");
+            } else {
+                // Timer chegou a zero!
+                clearInterval(timer);
+                countdown.style.display = "none";
+                waitingText.style.display = "none";
+                unlockArea.style.display = "block";
+            }
+        }
+
+        /* ==========================================
+           LÓGICA DE TRANSIÇÃO (REVELAR TELA)
+        ========================================== */
+        unlockButton.addEventListener("click", () => {
+            if (unlocked) return;
+            unlocked = true;
+
+            // Inicia o fade branco
+            transitionOverlay.classList.add("active");
+
+            // No meio do fade branco, troca as telas
+            setTimeout(() => {
+                lockScreen.classList.add("esconder-tela");
+                
+                // Oculta a tela de bloqueio do fluxo da página (a correção feita anteriormente)
+                setTimeout(() => {
+                    lockScreen.style.display = "none";
+                    content.classList.add("mostrar-conteudo");
+                }, 400);
+
+            }, 600);
+
+            // Remove o fade branco revelando a nova tela
+            setTimeout(() => {
+                transitionOverlay.classList.remove("active");
+            }, 1500);
+        });
+
+        // Inicializa
+        updateCountdown();
+        timer = setInterval(updateCountdown, 1000);
+
+    </script>
+
+</body>
+</html>

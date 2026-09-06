@@ -1,0 +1,2513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Alguns lugares... ♡</title>
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(255, 224, 231, .55),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(255, 235, 239, .6),
+                    transparent 30%
+                ),
+                #fffaf9;
+
+            color: #4e3d41;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================
+           FUNDO
+        ====================================== */
+
+        .fundo-coracao {
+
+            position: fixed;
+
+            color: #d9a0ac;
+
+            opacity: .20;
+
+            pointer-events: none;
+
+            font-size: 22px;
+
+            animation: flutuar 7s ease-in-out infinite;
+
+            z-index: 0;
+        }
+
+
+        .fc1 {
+            top: 13%;
+            left: 7%;
+        }
+
+        .fc2 {
+            top: 35%;
+            right: 7%;
+            animation-delay: 2s;
+        }
+
+        .fc3 {
+            bottom: 18%;
+            left: 10%;
+            animation-delay: 3s;
+        }
+
+        .fc4 {
+            bottom: 10%;
+            right: 13%;
+            animation-delay: 1s;
+        }
+
+
+        @keyframes flutuar {
+
+            0%, 100% {
+                transform:
+                    translateY(0)
+                    rotate(-5deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-12px)
+                    rotate(5deg);
+            }
+
+        }
+
+
+        /* =====================================
+           PÁGINA
+        ====================================== */
+
+        .pagina {
+
+            width: min(1100px, 92%);
+
+            margin: auto;
+
+            padding:
+                65px 0
+                70px;
+
+            position: relative;
+
+            z-index: 1;
+        }
+
+
+        /* =====================================
+           INTRO
+        ====================================== */
+
+        .intro {
+
+            text-align: center;
+
+            max-width: 750px;
+
+            margin:
+                0 auto
+                40px;
+        }
+
+
+        .mini-titulo {
+
+            text-transform: uppercase;
+
+            letter-spacing: 3px;
+
+            font-size: 12px;
+
+            color: #c68d99;
+
+            margin-bottom: 18px;
+        }
+
+
+        .intro h1 {
+
+            font-size:
+                clamp(
+                    40px,
+                    6vw,
+                    64px
+                );
+
+            font-weight: normal;
+
+            line-height: 1.1;
+
+            color: #4a393d;
+        }
+
+
+        .intro h1 span {
+
+            color: #d497a4;
+        }
+
+
+        .linha {
+
+            width: 60px;
+
+            height: 1px;
+
+            background: #d9abb5;
+
+            margin:
+                24px auto;
+        }
+
+
+        .intro p {
+
+            font-size: 17px;
+
+            line-height: 1.85;
+
+            color: #7b686d;
+        }
+
+
+        /* =====================================
+           CONTADOR
+        ====================================== */
+
+        .contador {
+
+            text-align: center;
+
+            margin:
+                35px auto
+                10px;
+
+            color: #a17d85;
+
+            font-size: 14px;
+        }
+
+
+        .contador strong {
+
+            color: #ca8e9b;
+
+            font-weight: normal;
+        }
+
+
+        /* =====================================
+           ÁREA DAS CARTINHAS
+        ====================================== */
+
+        .area-cartas {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 650px;
+
+            margin-top: 10px;
+
+            border-radius: 35px;
+
+            /*
+            leve aparência de papel
+            */
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255,255,255,.8),
+                    rgba(255,248,249,.35)
+                );
+
+            border:
+                1px solid rgba(232, 207, 212, .65);
+
+            overflow: hidden;
+
+            box-shadow:
+                inset 0 0 70px
+                rgba(190,130,145,.035);
+        }
+
+
+        .area-cartas::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 20px;
+
+            border:
+                1px dashed
+                rgba(211,163,173,.25);
+
+            border-radius: 27px;
+
+            pointer-events: none;
+        }
+
+
+        /* =====================================
+           MINI CARTA
+        ====================================== */
+
+        .mini-carta {
+
+            position: absolute;
+
+            width: 180px;
+
+            height: 125px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #fffefd,
+                    #fff6f7
+                );
+
+            border:
+                1px solid #e4c8ce;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 12px 28px
+                rgba(85,52,62,.12);
+
+            transition:
+                transform .35s ease,
+                box-shadow .35s ease,
+                opacity .4s ease;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            user-select: none;
+        }
+
+
+        /*
+        Formato de envelope
+        */
+
+        .mini-carta::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            top: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    transparent 49.5%,
+                    #e8cdd2 50%,
+                    transparent 50.5%
+                );
+
+            opacity: .8;
+
+            pointer-events: none;
+        }
+
+
+        .mini-carta::after {
+
+            content: "";
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 52%;
+
+            background:
+                linear-gradient(
+                    35deg,
+                    transparent 49%,
+                    rgba(230,204,210,.75) 50%,
+                    transparent 51%
+                );
+
+            pointer-events: none;
+        }
+
+
+        .mini-carta:hover {
+
+            transform:
+                translateY(-9px)
+                rotate(0deg)
+                scale(1.04);
+
+            box-shadow:
+                0 20px 38px
+                rgba(85,52,62,.18);
+        }
+
+
+        /* =====================================
+           POSIÇÕES
+        ====================================== */
+
+        .carta1 {
+
+            top: 9%;
+
+            left: 10%;
+
+            transform:
+                rotate(-7deg);
+        }
+
+
+        .carta2 {
+
+            top: 15%;
+
+            right: 11%;
+
+            transform:
+                rotate(6deg);
+        }
+
+
+        .carta3 {
+
+            top: 45%;
+
+            left: 30%;
+
+            transform:
+                rotate(4deg);
+        }
+
+
+        .carta4 {
+
+            top: 48%;
+
+            right: 22%;
+
+            transform:
+                rotate(-6deg);
+        }
+
+
+        .carta5 {
+
+            bottom: 8%;
+
+            left: 12%;
+
+            transform:
+                rotate(6deg);
+        }
+
+
+        .carta6 {
+
+            bottom: 10%;
+
+            right: 9%;
+
+            transform:
+                rotate(-5deg);
+        }
+
+
+        /* =====================================
+           CONTEÚDO DA MINI CARTA
+        ====================================== */
+
+        .mini-conteudo {
+
+            position: relative;
+
+            z-index: 3;
+
+            text-align: center;
+
+            pointer-events: none;
+        }
+
+
+        .mini-numero {
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            color: #c7939e;
+
+            margin-bottom: 9px;
+        }
+
+
+        .mini-coracao {
+
+            color: #d79ba7;
+
+            font-size: 28px;
+
+            line-height: 1;
+        }
+
+
+        .mini-texto {
+
+            margin-top: 7px;
+
+            font-size: 11px;
+
+            color: #94777e;
+
+            letter-spacing: .5px;
+        }
+
+
+        /* =====================================
+           CARTA ABERTA
+        ====================================== */
+
+        .mini-carta.aberta {
+
+            opacity: .42;
+
+            filter:
+                grayscale(.15);
+
+            cursor: default;
+
+            pointer-events: none;
+        }
+
+
+        .mini-carta.aberta .mini-coracao {
+
+            color: #b9a1a7;
+        }
+
+
+        .mini-carta.aberta .mini-texto::after {
+
+            content: " ✓";
+
+            color: #b79099;
+        }
+
+
+        /* =====================================
+           TEXTO CENTRAL
+        ====================================== */
+
+        .centro-mensagem {
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            text-align: center;
+
+            width: 280px;
+
+            pointer-events: none;
+
+            transition: opacity .5s ease;
+        }
+
+
+        .centro-mensagem .coracao {
+
+            color: #d49aa6;
+
+            font-size: 31px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .centro-mensagem p {
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            color: #9b7d84;
+        }
+
+
+        .centro-mensagem.escondida {
+
+            opacity: 0;
+        }
+
+
+        /* =====================================
+           MODAL DA CARTA
+        ====================================== */
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 1000;
+
+            background:
+                rgba(58,40,44,.48);
+
+            backdrop-filter:
+                blur(8px);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 18px;
+        }
+
+
+        .modal.ativo {
+
+            display: flex;
+
+            animation:
+                aparecer .3s ease;
+        }
+
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+
+        }
+
+
+        /* =====================================
+           PAPEL ABERTO
+        ====================================== */
+
+        .papel {
+
+            position: relative;
+
+            width: min(820px, 100%);
+
+            max-height: 94vh;
+
+            overflow-y: auto;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #fffefd,
+                    #fff7f8
+                );
+
+            border:
+                1px solid #e3c7cd;
+
+            border-radius: 22px;
+
+            padding: 14px;
+
+            box-shadow:
+                0 35px 90px
+                rgba(40,25,30,.28);
+
+            animation:
+                abrirPapel .45s ease;
+        }
+
+
+        @keyframes abrirPapel {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    scale(.92)
+                    translateY(25px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    translateY(0);
+            }
+
+        }
+
+
+        .fechar {
+
+            position: absolute;
+
+            right: 22px;
+
+            top: 22px;
+
+            width: 43px;
+
+            height: 43px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid #dfc3c9;
+
+            background:
+                rgba(255,255,255,.92);
+
+            color: #86656d;
+
+            font-size: 22px;
+
+            cursor: pointer;
+
+            z-index: 5;
+        }
+
+
+        .fechar:hover {
+
+            background: white;
+
+            transform: rotate(8deg);
+        }
+
+
+        /* =====================================
+           FOTO DENTRO DA CARTA
+        ====================================== */
+
+        .foto-aberta {
+
+            width: 100%;
+
+            min-height: 360px;
+
+            max-height: 58vh;
+
+            padding: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f8eeee;
+
+            border-radius: 16px;
+        }
+
+
+        .foto-aberta img {
+
+            width: 100%;
+
+            height: 100%;
+
+            max-height: 54vh;
+
+            object-fit: contain;
+
+            border-radius: 10px;
+
+            display: block;
+        }
+
+
+        /* =====================================
+           TEXTO
+        ====================================== */
+
+        .texto-aberto {
+
+            text-align: center;
+
+            padding:
+                28px
+                20px
+                20px;
+        }
+
+
+        .texto-aberto .numero {
+
+            color: #cc929e;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .texto-aberto h2 {
+
+            font-size:
+                clamp(
+                    30px,
+                    5vw,
+                    42px
+                );
+
+            font-weight: normal;
+
+            color: #4d3b3f;
+
+            margin-bottom: 16px;
+        }
+
+
+        .linha-aberta {
+
+            width: 45px;
+
+            height: 1px;
+
+            background: #d8a7b1;
+
+            margin:
+                0 auto
+                20px;
+        }
+
+
+        .texto-aberto p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            font-size: 17px;
+
+            line-height: 1.9;
+
+            color: #746167;
+        }
+
+
+        .local {
+
+            margin-top: 20px !important;
+
+            font-size: 13px !important;
+
+            color: #ae858e !important;
+        }
+
+
+        .coracao-final {
+
+            margin-top: 20px;
+
+            color: #d499a6;
+
+            font-size: 21px;
+        }
+
+
+        /* =====================================
+           ÁREA FINALIZADA
+        ====================================== */
+
+        .todos-abertos {
+
+            display: none;
+
+            text-align: center;
+
+            margin:
+                35px auto
+                0;
+
+            animation:
+                subir .8s ease;
+        }
+
+
+        .todos-abertos.mostrar {
+
+            display: block;
+        }
+
+
+        @keyframes subir {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        .todos-abertos .grande {
+
+            color: #d399a5;
+
+            font-size: 34px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .todos-abertos h2 {
+
+            font-size: 30px;
+
+            font-weight: normal;
+
+            color: #4c3a3f;
+
+            margin-bottom: 10px;
+        }
+
+
+        .todos-abertos p {
+
+            color: #8c747a;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================
+           MAPA
+        ====================================== */
+
+        .mapa-section {
+
+            display: none;
+
+            margin-top: 50px;
+
+            animation:
+                aparecerMapa 1s ease;
+        }
+
+
+        .mapa-section.mostrar {
+
+            display: block;
+        }
+
+
+        @keyframes aparecerMapa {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(35px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        .mapa-titulo {
+
+            text-align: center;
+
+            margin-bottom: 28px;
+        }
+
+
+        .mapa-titulo .mini-titulo {
+
+            margin-bottom: 12px;
+        }
+
+
+        .mapa-titulo h2 {
+
+            font-size:
+                clamp(
+                    30px,
+                    5vw,
+                    43px
+                );
+
+            font-weight: normal;
+
+            color: #4c3b3f;
+
+            margin-bottom: 12px;
+        }
+
+
+        .mapa-titulo p {
+
+            color: #8b747a;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+
+        .mapa-box {
+
+            padding: 9px;
+
+            border:
+                1px solid #e8cfd4;
+
+            border-radius: 26px;
+
+            background:
+                rgba(255,255,255,.8);
+
+            box-shadow:
+                0 18px 50px
+                rgba(90,55,65,.09);
+        }
+
+
+        #map {
+
+            width: 100%;
+
+            height: 520px;
+
+            border-radius: 19px;
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================
+           POPUP
+        ====================================== */
+
+        .popup {
+
+            width: 190px;
+
+            text-align: center;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+        }
+
+
+        .popup img {
+
+            width: 100%;
+
+            height: 130px;
+
+            object-fit: contain;
+
+            background: #f8eeee;
+
+            border-radius: 10px;
+
+            display: block;
+
+            margin-bottom: 9px;
+        }
+
+
+        .popup strong {
+
+            display: block;
+
+            color: #4e3c40;
+
+            font-size: 17px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .popup span {
+
+            display: block;
+
+            color: #897178;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================
+           FRASE
+        ====================================== */
+
+        .final {
+
+            display: none;
+
+            max-width: 720px;
+
+            margin:
+                60px auto
+                30px;
+
+            padding:
+                38px 28px;
+
+            text-align: center;
+
+            border:
+                1px solid #e6ccd2;
+
+            border-radius: 25px;
+
+            background:
+                rgba(255,255,255,.65);
+
+            animation:
+                aparecerMapa 1s ease;
+        }
+
+
+        .final.mostrar {
+
+            display: block;
+        }
+
+
+        .aspas {
+
+            color: #dca4af;
+
+            font-size: 45px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .final p {
+
+            color: #68545a;
+
+            font-size: 20px;
+
+            line-height: 1.8;
+
+            font-style: italic;
+        }
+
+
+        .final small {
+
+            display: block;
+
+            color: #b58a94;
+
+            margin-top: 18px;
+        }
+
+
+        /* =====================================
+           BOTÃO
+        ====================================== */
+
+        .continuar {
+
+            display: none;
+
+            text-align: center;
+
+            margin-top: 30px;
+        }
+
+
+        .continuar.mostrar {
+
+            display: block;
+        }
+
+
+        .continuar a {
+
+            display: inline-block;
+
+            padding:
+                14px 30px;
+
+            border:
+                1px solid #d9adb6;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255,255,255,.75);
+
+            color: #77545c;
+
+            text-decoration: none;
+
+            transition: .3s;
+        }
+
+
+        .continuar a:hover {
+
+            background: white;
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        /* =====================================
+           CELULAR
+        ====================================== */
+
+        @media (max-width: 700px) {
+
+            .pagina {
+
+                width: 94%;
+
+                padding-top: 45px;
+            }
+
+
+            .area-cartas {
+
+                height: 680px;
+            }
+
+
+            .mini-carta {
+
+                width: 145px;
+
+                height: 105px;
+            }
+
+
+            .carta1 {
+
+                left: 4%;
+
+                top: 8%;
+            }
+
+
+            .carta2 {
+
+                right: 4%;
+
+                top: 16%;
+            }
+
+
+            .carta3 {
+
+                left: 5%;
+
+                top: 43%;
+            }
+
+
+            .carta4 {
+
+                right: 5%;
+
+                top: 48%;
+            }
+
+
+            .carta5 {
+
+                left: 7%;
+
+                bottom: 7%;
+            }
+
+
+            .carta6 {
+
+                right: 5%;
+
+                bottom: 9%;
+            }
+
+
+            .centro-mensagem {
+
+                width: 210px;
+            }
+
+
+            .centro-mensagem p {
+
+                font-size: 13px;
+            }
+
+
+            .foto-aberta {
+
+                min-height: 280px;
+
+                max-height: 48vh;
+            }
+
+
+            .foto-aberta img {
+
+                max-height: 45vh;
+            }
+
+
+            #map {
+
+                height: 380px;
+            }
+
+        }
+
+
+        @media (max-width: 420px) {
+
+            .area-cartas {
+
+                height: 620px;
+            }
+
+
+            .mini-carta {
+
+                width: 130px;
+
+                height: 95px;
+            }
+
+
+            .mini-coracao {
+
+                font-size: 23px;
+            }
+
+
+            .mini-numero {
+
+                font-size: 9px;
+            }
+
+
+            .mini-texto {
+
+                font-size: 9px;
+            }
+
+
+            .carta3 {
+
+                left: 5%;
+            }
+
+
+            .carta4 {
+
+                right: 3%;
+            }
+
+
+            .centro-mensagem {
+
+                width: 180px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         CORAÇÕES DO FUNDO
+    ====================================== -->
+
+    <div class="fundo-coracao fc1">♡</div>
+
+    <div class="fundo-coracao fc2">♡</div>
+
+    <div class="fundo-coracao fc3">♡</div>
+
+    <div class="fundo-coracao fc4">♡</div>
+
+
+    <main class="pagina">
+
+
+        <!-- =====================================
+             INTRO
+        ====================================== -->
+
+        <section class="intro">
+
+            <div class="mini-titulo">
+                alguns lugares especiais
+            </div>
+
+
+            <h1>
+
+                Pequenas cartas<br>
+
+                <span>para alguns lugares ♡</span>
+
+            </h1>
+
+
+            <div class="linha"></div>
+
+
+            <p>
+
+                Existem lugares que acabam guardando
+                histórias sem a gente perceber.
+
+                <br><br>
+
+                Talvez você encontre algumas delas por aqui...
+
+            </p>
+
+        </section>
+
+
+        <!-- CONTADOR -->
+
+        <div class="contador">
+
+            <strong id="contadorNumero">
+                0
+            </strong>
+
+            de 6 cartas descobertas ♡
+
+        </div>
+
+
+        <!-- =====================================
+             CARTAS ESPALHADAS
+        ====================================== -->
+
+        <section
+            class="area-cartas"
+            id="areaCartas"
+        >
+
+
+            <!-- MENSAGEM CENTRAL -->
+
+            <div
+                class="centro-mensagem"
+                id="centroMensagem"
+            >
+
+                <div class="coracao">
+                    ♡
+                </div>
+
+                <p>
+
+                    Algumas lembranças estão
+                    escondidas por aqui...
+
+                    <br>
+
+                    encontre todas.
+
+                </p>
+
+            </div>
+
+
+            <!-- =================================
+                 CARTA 01
+            ================================== -->
+
+            <button
+                class="mini-carta carta1"
+                data-index="0"
+                type="button"
+            >
+
+                <div class="mini-conteudo">
+
+                    <div class="mini-numero">
+                        01
+                    </div>
+
+                    <div class="mini-coracao">
+                        ♡
+                    </div>
+
+                    <div class="mini-texto">
+                        abra-me
+                    </div>
+
+                </div>
+
+            </button>
+
+
+            <!-- =================================
+                 CARTA 02
+            ================================== -->
+
+            <button
+                class="mini-carta carta2"
+                data-index="1"
+                type="button"
+            >
+
+                <div class="mini-conteudo">
+
+                    <div class="mini-numero">
+                        02
+                    </div>
+
+                    <div class="mini-coracao">
+                        ♡
+                    </div>
+
+                    <div class="mini-texto">
+                        abra-me
+                    </div>
+
+                </div>
+
+            </button>
+
+
+            <!-- =================================
+                 CARTA 03
+            ================================== -->
+
+            <button
+                class="mini-carta carta3"
+                data-index="2"
+                type="button"
+            >
+
+                <div class="mini-conteudo">
+
+                    <div class="mini-numero">
+                        03
+                    </div>
+
+                    <div class="mini-coracao">
+                        ♡
+                    </div>
+
+                    <div class="mini-texto">
+                        abra-me
+                    </div>
+
+                </div>
+
+            </button>
+
+
+            <!-- =================================
+                 CARTA 04
+            ================================== -->
+
+            <button
+                class="mini-carta carta4"
+                data-index="3"
+                type="button"
+            >
+
+                <div class="mini-conteudo">
+
+                    <div class="mini-numero">
+                        04
+                    </div>
+
+                    <div class="mini-coracao">
+                        ♡
+                    </div>
+
+                    <div class="mini-texto">
+                        abra-me
+                    </div>
+
+                </div>
+
+            </button>
+
+
+            <!-- =================================
+                 CARTA 05
+            ================================== -->
+
+            <button
+                class="mini-carta carta5"
+                data-index="4"
+                type="button"
+            >
+
+                <div class="mini-conteudo">
+
+                    <div class="mini-numero">
+                        05
+                    </div>
+
+                    <div class="mini-coracao">
+                        ♡
+                    </div>
+
+                    <div class="mini-texto">
+                        abra-me
+                    </div>
+
+                </div>
+
+            </button>
+
+
+            <!-- =================================
+                 CARTA 06
+            ================================== -->
+
+            <button
+                class="mini-carta carta6"
+                data-index="5"
+                type="button"
+            >
+
+                <div class="mini-conteudo">
+
+                    <div class="mini-numero">
+                        06
+                    </div>
+
+                    <div class="mini-coracao">
+                        ♡
+                    </div>
+
+                    <div class="mini-texto">
+                        abra-me
+                    </div>
+
+                </div>
+
+            </button>
+
+
+        </section>
+
+
+        <!-- =====================================
+             MENSAGEM QUANDO TERMINAR
+        ====================================== -->
+
+        <section
+            class="todos-abertos"
+            id="todosAbertos"
+        >
+
+            <div class="grande">
+                ♡
+            </div>
+
+
+            <h2>
+                Você encontrou todos.
+            </h2>
+
+
+            <p>
+
+                Agora dá para enxergar
+                onde algumas dessas memórias
+                aconteceram.
+
+                <br>
+
+                olha só...
+
+            </p>
+
+        </section>
+
+
+        <!-- =====================================
+             MAPA
+        ====================================== -->
+
+        <section
+            class="mapa-section"
+            id="mapaSection"
+        >
+
+            <div class="mapa-titulo">
+
+                <div class="mini-titulo">
+                    depois de todas as cartas...
+                </div>
+
+
+                <h2>
+                    O mapa da nossa história ♡
+                </h2>
+
+
+                <p>
+
+                    Clique nos lugares e veja
+                    a lembrança que cada um guarda.
+
+                </p>
+
+            </div>
+
+
+            <div class="mapa-box">
+
+                <div id="map"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             FRASE
+        ====================================== -->
+
+        <section
+            class="final"
+            id="final"
+        >
+
+            <div class="aspas">
+                “
+            </div>
+
+
+            <p>
+
+                Talvez os lugares não sejam tão
+                importantes assim...
+
+                até que alguém especial faça
+                parte deles.
+
+            </p>
+
+
+            <small>
+                e agora eles fazem parte da nossa história. ♡
+            </small>
+
+        </section>
+
+
+        <!-- =====================================
+             CONTINUAR
+        ====================================== -->
+
+        <div
+            class="continuar"
+            id="continuar"
+        >
+
+            <a href="surpresa.html">
+
+                continuar → ♡
+
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =====================================
+         MODAL
+    ====================================== -->
+
+    <div
+        class="modal"
+        id="modal"
+    >
+
+        <div class="papel">
+
+
+            <button
+                class="fechar"
+                id="fechar"
+                type="button"
+            >
+                ×
+            </button>
+
+
+            <div class="foto-aberta">
+
+                <img
+                    id="modalImagem"
+                    src=""
+                    alt=""
+                >
+
+            </div>
+
+
+            <div class="texto-aberto">
+
+
+                <div
+                    class="numero"
+                    id="modalNumero"
+                >
+                </div>
+
+
+                <h2 id="modalTitulo">
+                </h2>
+
+
+                <div class="linha-aberta"></div>
+
+
+                <p id="modalDescricao">
+                </p>
+
+
+                <p
+                    class="local"
+                    id="modalLocal"
+                >
+                </p>
+
+
+                <div class="coracao-final">
+                    ♡
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LEAFLET -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+    <script>
+
+
+        /* =====================================
+           DADOS
+        ====================================== */
+
+        const lugares = [
+
+            {
+
+                titulo:
+                    "Igreja Matriz",
+
+                numero:
+                    "01 · UM COMEÇO",
+
+                imagem:
+                    "img/matriz.jpg",
+
+                descricao:
+                    "Onde nos vimos a primeira vez e o grandioso CLJ. Um lugar que acabou ganhando um significado muito maior na minha e na nossa história.",
+
+                local:
+                    "📍 Centro · Viamão, RS",
+
+                lat:
+                    -30.08188,
+
+                lng:
+                    -51.02407
+
+            },
+
+
+            {
+
+                titulo:
+                    "Buena Vista",
+
+                numero:
+                    "02 · PRIMEIRO BEIJO",
+
+                imagem:
+                    "img/buena.jpg",
+
+                descricao:
+                    "Nosso primeiro beijo e lugar que você mora onde guardamos diversos momentos juntos, seja eu fazendo burguers para sua família ou vendo o jogo do Brasil.",
+
+                local:
+                    "📍 Buena Vista · Viamão, RS",
+
+                lat:
+                    -30.0756,
+
+                lng:
+                    -51.0463
+
+            },
+
+
+            {
+
+                titulo:
+                    "Minha casa",
+
+                numero:
+                    "03 · UM MOMENTO ESPECIAL",
+
+                imagem:
+                    "img/minhacasa.jpg",
+
+                descricao:
+                    "Onde eu moro, onde foi o pedido de namoro e onde passamos vários momentos juntos. Um lugar que acabou fazendo parte de uma das memórias mais importantes da nossa história.",
+
+                local:
+                    "📍 Viamão, RS",
+
+                lat:
+                    -30.0711,
+
+                lng:
+                    -50.9836
+
+            },
+
+
+            {
+
+                titulo:
+                    "Casa da sua vó",
+
+                numero:
+                    "04 · MOMENTOS SIMPLES",
+
+                imagem:
+                    "img/avo.jpg",
+
+                descricao:
+                    "Lugar onde vamos para almoçar às vezes quando não queremos gastar kkk, onde ficamos antes de alguma festa e onde também compartilhamos vários momentos e onde está o seu Vô que eu amo tantoooo.",
+
+                local:
+                    "📍 Centro · Viamão, RS",
+
+                lat:
+                    -30.0805,
+
+                lng:
+                    -51.0215
+
+            },
+
+
+            {
+
+                titulo:
+                    "Gramado",
+
+                numero:
+                    "05 · NOSSA PRIMEIRA VIAGEM",
+
+                imagem:
+                    "img/gramado.jpg",
+
+                descricao:
+                    "O primeiro lugar que viajamos juntos. Uma viagem que ficou especial por tudo que vivemos naquele lugar.",
+
+                local:
+                    "📍 Gramado · RS",
+
+                lat:
+                    -29.37984,
+
+                lng:
+                    -50.87287
+
+            },
+
+
+            {
+
+                titulo:
+                    "Vianney",
+
+                numero:
+                    "06 · FÉ",
+
+                imagem:
+                    "img/vianney.jpg",
+
+                descricao:
+                    "A igreja que frequentamos a missa e onde seus pais estão sempre indo. Um lugar que faz parte da nossa rotina e também da nossa história.",
+
+                local:
+                    "📍 Santo Onofre · Viamão, RS",
+
+                lat:
+                    -30.0850,
+
+                lng:
+                    -51.0550
+
+            }
+
+        ];
+
+
+        /* =====================================
+           ELEMENTOS
+        ====================================== */
+
+        const miniCartas =
+            document.querySelectorAll(".mini-carta");
+
+        const modal =
+            document.getElementById("modal");
+
+        const fechar =
+            document.getElementById("fechar");
+
+        const modalImagem =
+            document.getElementById("modalImagem");
+
+        const modalNumero =
+            document.getElementById("modalNumero");
+
+        const modalTitulo =
+            document.getElementById("modalTitulo");
+
+        const modalDescricao =
+            document.getElementById("modalDescricao");
+
+        const modalLocal =
+            document.getElementById("modalLocal");
+
+        const contadorNumero =
+            document.getElementById("contadorNumero");
+
+        const centroMensagem =
+            document.getElementById("centroMensagem");
+
+        const todosAbertos =
+            document.getElementById("todosAbertos");
+
+        const mapaSection =
+            document.getElementById("mapaSection");
+
+        const final =
+            document.getElementById("final");
+
+        const continuar =
+            document.getElementById("continuar");
+
+
+        /* =====================================
+           CONTROLE
+        ====================================== */
+
+        let descobertas =
+            new Set();
+
+
+        /* =====================================
+           ABRIR CARTA
+        ====================================== */
+
+        miniCartas.forEach(
+            carta => {
+
+                carta.addEventListener(
+                    "click",
+                    () => {
+
+                        const indice =
+                            Number(
+                                carta.dataset.index
+                            );
+
+                        const lugar =
+                            lugares[indice];
+
+
+                        /*
+                         * Se já foi aberta,
+                         * não abre novamente.
+                         */
+
+                        if (
+                            descobertas.has(indice)
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        /*
+                         * Marca como descoberta.
+                         */
+
+                        descobertas.add(indice);
+
+
+                        carta.classList.add(
+                            "aberta"
+                        );
+
+
+                        /*
+                         * Atualiza contador.
+                         */
+
+                        contadorNumero.textContent =
+                            descobertas.size;
+
+
+                        /*
+                         * Coloca informações
+                         * dentro da carta.
+                         */
+
+                        modalImagem.src =
+                            lugar.imagem;
+
+                        modalImagem.alt =
+                            lugar.titulo;
+
+                        modalNumero.textContent =
+                            lugar.numero;
+
+                        modalTitulo.textContent =
+                            lugar.titulo;
+
+                        modalDescricao.textContent =
+                            lugar.descricao;
+
+                        modalLocal.textContent =
+                            lugar.local;
+
+
+                        /*
+                         * Abre modal.
+                         */
+
+                        modal.classList.add(
+                            "ativo"
+                        );
+
+
+                        document.body.style.overflow =
+                            "hidden";
+
+
+                        /*
+                         * Esconde mensagem
+                         * central enquanto abre.
+                         */
+
+                        centroMensagem.classList.add(
+                            "escondida"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================
+           FECHAR CARTA
+        ====================================== */
+
+        function fecharModal() {
+
+            modal.classList.remove(
+                "ativo"
+            );
+
+            document.body.style.overflow =
+                "";
+
+
+            /*
+             * Se ainda faltam cartas,
+             * volta a mensagem central.
+             */
+
+            if (
+                descobertas.size < lugares.length
+            ) {
+
+                centroMensagem.classList.remove(
+                    "escondida"
+                );
+
+            }
+
+
+            /*
+             * Se terminou tudo,
+             * libera o mapa.
+             */
+
+            if (
+                descobertas.size === lugares.length
+            ) {
+
+                mostrarMapa();
+
+            }
+
+        }
+
+
+        fechar.addEventListener(
+            "click",
+            fecharModal
+        );
+
+
+        /*
+         * Clicar fora da carta fecha.
+         */
+
+        modal.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target === modal
+                ) {
+
+                    fecharModal();
+
+                }
+
+            }
+        );
+
+
+        /*
+         * ESC também fecha.
+         */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape" &&
+                    modal.classList.contains("ativo")
+                ) {
+
+                    fecharModal();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================
+           MOSTRAR MAPA
+        ====================================== */
+
+        function mostrarMapa() {
+
+            todosAbertos.classList.add(
+                "mostrar"
+            );
+
+
+            setTimeout(
+                () => {
+
+                    mapaSection.classList.add(
+                        "mostrar"
+                    );
+
+                    final.classList.add(
+                        "mostrar"
+                    );
+
+                    continuar.classList.add(
+                        "mostrar"
+                    );
+
+
+                    /*
+                     * Inicializa mapa apenas
+                     * quando ele fica visível.
+                     */
+
+                    inicializarMapa();
+
+                },
+                700
+            );
+
+        }
+
+
+        /* =====================================
+           MAPA
+        ====================================== */
+
+        let mapaInicializado = false;
+
+
+        function inicializarMapa() {
+
+            if (
+                mapaInicializado
+            ) {
+
+                return;
+
+            }
+
+
+            mapaInicializado = true;
+
+
+            const mapa =
+                L.map("map");
+
+
+            L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+
+                    maxZoom: 19,
+
+                    attribution:
+                        "&copy; OpenStreetMap"
+
+                }
+            ).addTo(mapa);
+
+
+            const pontos = [];
+
+
+            lugares.forEach(
+                lugar => {
+
+                    const ponto = [
+                        lugar.lat,
+                        lugar.lng
+                    ];
+
+
+                    pontos.push(
+                        ponto
+                    );
+
+
+                    const marcador =
+                        L.marker(ponto)
+                        .addTo(mapa);
+
+
+                    /*
+                     * Quando clicar no marcador,
+                     * aparece a imagem do lugar.
+                     */
+
+                    marcador.bindPopup(`
+
+                        <div class="popup">
+
+                            <img
+                                src="${lugar.imagem}"
+                                alt="${lugar.titulo}"
+                            >
+
+                            <strong>
+                                ${lugar.titulo}
+                            </strong>
+
+                            <span>
+                                ${lugar.descricao}
+                            </span>
+
+                        </div>
+
+                    `);
+
+                }
+            );
+
+
+            /*
+             * Mostra todos os lugares.
+             */
+
+            mapa.fitBounds(
+                pontos,
+                {
+                    padding: [
+                        45,
+                        45
+                    ]
+                }
+            );
+
+
+            /*
+             * Corrige tamanho depois
+             * da animação.
+             */
+
+            setTimeout(
+                () => {
+
+                    mapa.invalidateSize();
+
+                },
+                1000
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

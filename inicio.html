@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nossa História ♡</title>
+
+    <style>
+
+        /* ==================================================
+           CONFIGURAÇÕES GERAIS
+        ================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(221, 165, 176, 0.16), transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(221, 165, 176, 0.14), transparent 25%),
+                #fff9fa;
+
+            color: #5c3038;
+
+            overflow-x: hidden;
+        }
+
+
+        /* ==================================================
+           DECORAÇÕES DOS CANTOS
+        ================================================== */
+
+        body::before {
+            content: "♡";
+            position: fixed;
+            top: 25px;
+            left: 25px;
+
+            font-size: 34px;
+            color: rgba(174, 99, 116, 0.25);
+
+            transform: rotate(-15deg);
+
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "♡";
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+
+            font-size: 42px;
+            color: rgba(174, 99, 116, 0.22);
+
+            transform: rotate(15deg);
+
+            pointer-events: none;
+        }
+
+
+        /* ==================================================
+           CABEÇALHO
+        ================================================== */
+
+        header {
+            position: relative;
+
+            text-align: center;
+
+            padding: 110px 20px 80px;
+        }
+
+        .mini {
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            color: #aa6874;
+
+            margin-bottom: 22px;
+        }
+
+        header h1 {
+            font-size: clamp(42px, 7vw, 68px);
+
+            font-weight: normal;
+
+            color: #713b45;
+
+            margin-bottom: 20px;
+
+            line-height: 1.1;
+        }
+
+        header p {
+            font-family: Arial, sans-serif;
+
+            font-size: 14px;
+
+            color: #98717a;
+
+            letter-spacing: 0.3px;
+        }
+
+
+        /* Pequena decoração embaixo do título */
+
+        .titulo-detalhe {
+            margin-top: 27px;
+
+            color: #c38b96;
+
+            font-size: 14px;
+
+            letter-spacing: 8px;
+        }
+
+
+        /* ==================================================
+           TIMELINE
+        ================================================== */
+
+        .timeline {
+            width: min(92%, 1000px);
+
+            margin: 0 auto;
+
+            position: relative;
+
+            padding: 30px 0 50px;
+        }
+
+
+        /* Linha */
+
+        .timeline::before {
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 0;
+            bottom: 0;
+
+            width: 1px;
+
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                #d9aab2 5%,
+                #d9aab2 95%,
+                transparent
+            );
+
+            transform: translateX(-50%);
+        }
+
+
+        /* ==================================================
+           EVENTOS
+        ================================================== */
+
+        .evento {
+            width: 50%;
+
+            position: relative;
+
+            padding: 25px 55px;
+
+            margin-bottom: 65px;
+        }
+
+        .evento:nth-child(odd) {
+            left: 0;
+
+            text-align: right;
+        }
+
+        .evento:nth-child(even) {
+            left: 50%;
+
+            text-align: left;
+        }
+
+
+        /* ==================================================
+           BOLINHA DA TIMELINE
+        ================================================== */
+
+        .evento::after {
+            content: "♡";
+
+            position: absolute;
+
+            top: 29px;
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background: #fff9fa;
+
+            border: 1px solid #d19aa5;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            color: #a75d69;
+
+            font-size: 16px;
+
+            z-index: 5;
+
+            box-shadow:
+                0 0 0 7px rgba(255, 249, 250, 0.9);
+        }
+
+        .evento:nth-child(odd)::after {
+            right: -19px;
+        }
+
+        .evento:nth-child(even)::after {
+            left: -19px;
+        }
+
+
+        /* ==================================================
+           DATA
+        ================================================== */
+
+        .data {
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            font-weight: 500;
+
+            letter-spacing: 2.5px;
+
+            text-transform: uppercase;
+
+            color: #aa6874;
+
+            margin-bottom: 11px;
+        }
+
+
+        /* ==================================================
+           TÍTULOS
+        ================================================== */
+
+        .evento h2 {
+            font-size: clamp(24px, 3vw, 31px);
+
+            font-weight: normal;
+
+            line-height: 1.25;
+
+            color: #713b45;
+
+            margin-bottom: 17px;
+        }
+
+
+        /* ==================================================
+           TEXTOS
+        ================================================== */
+
+        .evento p {
+            font-family: Arial, sans-serif;
+
+            font-size: 14.5px;
+
+            line-height: 1.8;
+
+            color: #806169;
+
+            margin-top: 17px;
+        }
+
+
+        /* ==================================================
+           FOTOS
+        ================================================== */
+
+        .foto-vertical,
+        .foto-cinema {
+            width: 220px;
+            height: 330px;
+
+            object-fit: cover;
+
+            display: block;
+
+            border-radius: 12px;
+
+            border: 7px solid rgba(255, 255, 255, 0.9);
+
+            box-shadow:
+                0 12px 35px rgba(104, 57, 67, 0.13);
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease;
+        }
+
+        .foto-vertical:hover,
+        .foto-cinema:hover {
+            transform: translateY(-5px) rotate(-1deg);
+
+            box-shadow:
+                0 18px 40px rgba(104, 57, 67, 0.18);
+        }
+
+        .evento:nth-child(odd) img {
+            margin-left: auto;
+        }
+
+        .evento:nth-child(even) img {
+            margin-right: auto;
+        }
+
+
+        /* ==================================================
+           19 DE JANEIRO
+        ================================================== */
+
+        .evento-especial {
+            padding-top: 30px;
+        }
+
+        .detalhe-coracao {
+            color: #b76878;
+
+            font-size: 22px;
+
+            margin-bottom: 10px;
+
+            animation: pulsar 2.2s ease-in-out infinite;
+        }
+
+        .frase-especial {
+            font-family: Georgia, "Times New Roman", serif !important;
+
+            font-size: 18px !important;
+
+            line-height: 1.7 !important;
+
+            color: #713b45 !important;
+
+            font-style: italic;
+
+            padding-top: 4px;
+        }
+
+        .pontinhos {
+            color: #c28b96;
+
+            letter-spacing: 8px;
+
+            margin-top: 25px;
+        }
+
+
+        /* ==================================================
+           GRAMADO
+        ================================================== */
+
+        .evento-gramado {
+            padding-top: 30px;
+        }
+
+        .frase-gramado {
+            font-family: Georgia, "Times New Roman", serif !important;
+
+            font-size: 18px !important;
+
+            line-height: 1.7 !important;
+
+            color: #713b45 !important;
+
+            font-style: italic;
+        }
+
+
+        /* ==================================================
+           PEDIDO DE NAMORO
+        ================================================== */
+
+        .evento-pedido {
+            padding-top: 30px;
+        }
+
+        .hora {
+            display: inline-block;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            color: #a75d69;
+
+            border: 1px solid #d7a5ae;
+
+            border-radius: 50px;
+
+            padding: 7px 15px;
+
+            margin-bottom: 13px;
+        }
+
+        .evento-pedido h2 {
+            font-size: clamp(26px, 3vw, 33px);
+
+            color: #713642;
+        }
+
+        .pedido-frase {
+            font-family: Georgia, "Times New Roman", serif !important;
+
+            font-size: 20px !important;
+
+            line-height: 1.7 !important;
+
+            color: #713642 !important;
+
+            font-style: italic;
+        }
+
+        .coracoes {
+            margin-top: 25px;
+
+            color: #b76878;
+
+            font-size: 17px;
+
+            letter-spacing: 6px;
+        }
+
+
+        /* ==================================================
+           ENCERRAMENTO
+           
+           IMPORTANTE:
+           Não está dentro da linha da timeline.
+        ================================================== */
+
+        .final-area {
+            position: relative;
+
+            width: min(92%, 850px);
+
+            margin: 10px auto 100px;
+
+            padding: 0 20px;
+        }
+
+
+        /* Cantos decorativos */
+
+        .final-area::before {
+            content: "✦";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            color: #d09ba5;
+
+            font-size: 18px;
+        }
+
+        .final-area::after {
+            content: "✦";
+
+            position: absolute;
+
+            right: 0;
+            bottom: 0;
+
+            color: #d09ba5;
+
+            font-size: 18px;
+        }
+
+
+        /* Carta */
+
+        .final-historia {
+            position: relative;
+
+            padding: 60px 60px;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.52);
+
+            border: 1px solid rgba(201, 141, 152, 0.45);
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 15px 50px rgba(110, 60, 70, 0.07);
+        }
+
+
+        /* Cantos internos */
+
+        .final-historia::before {
+            content: "♡";
+
+            position: absolute;
+
+            top: 18px;
+            left: 24px;
+
+            color: #d19aa4;
+
+            font-size: 19px;
+        }
+
+        .final-historia::after {
+            content: "♡";
+
+            position: absolute;
+
+            bottom: 18px;
+            right: 24px;
+
+            color: #d19aa4;
+
+            font-size: 19px;
+        }
+
+        .final-historia h2 {
+            font-size: clamp(27px, 4vw, 36px);
+
+            font-weight: normal;
+
+            color: #713b45;
+
+            margin-bottom: 22px;
+        }
+
+        .final-historia p {
+            max-width: 650px;
+
+            margin: 0 auto;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 14.5px;
+
+            line-height: 1.9;
+
+            color: #806169;
+        }
+
+        .final-historia p + p {
+            margin-top: 14px;
+        }
+
+        .final-historia .ultima-frase {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 19px;
+
+            line-height: 1.7;
+
+            font-style: italic;
+
+            color: #713b45;
+
+            margin-top: 25px;
+        }
+
+        .final-coracao {
+            margin-top: 30px;
+
+            color: #b76878;
+
+            font-size: 18px;
+
+            letter-spacing: 7px;
+        }
+
+        /* ==================================================
+           BOTÃO SOFIA
+        ================================================== */
+
+        .btn-sofia {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 14px 32px;
+            background-color: #d19aa4;
+            color: #fff9fa;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(113, 59, 69, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .btn-sofia:hover {
+            background-color: #b76878;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(113, 59, 69, 0.25);
+        }
+
+        /* ==================================================
+           ANIMAÇÃO DO CORAÇÃO
+        ================================================== */
+
+        @keyframes pulsar {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+
+        /* ==================================================
+           TABLET
+        ================================================== */
+
+        @media (max-width: 800px) {
+
+            .evento {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+
+            .foto-vertical,
+            .foto-cinema {
+                width: 200px;
+                height: 300px;
+            }
+
+        }
+
+
+        /* ==================================================
+           CELULAR
+        ================================================== */
+
+        @media (max-width: 650px) {
+
+            body::before {
+                top: 15px;
+                left: 15px;
+                font-size: 25px;
+            }
+
+            body::after {
+                right: 15px;
+                bottom: 15px;
+                font-size: 30px;
+            }
+
+
+            /* Cabeçalho */
+
+            header {
+                padding: 75px 22px 55px;
+            }
+
+            .mini {
+                font-size: 9px;
+
+                letter-spacing: 2.5px;
+
+                margin-bottom: 18px;
+            }
+
+            header h1 {
+                font-size: 42px;
+            }
+
+            header p {
+                font-size: 13px;
+
+                line-height: 1.6;
+            }
+
+
+            /* Timeline */
+
+            .timeline {
+                width: 92%;
+
+                padding-top: 15px;
+            }
+
+
+            /* Linha lateral */
+
+            .timeline::before {
+                left: 16px;
+
+                transform: none;
+            }
+
+
+            /* Eventos */
+
+            .evento,
+            .evento:nth-child(odd),
+            .evento:nth-child(even) {
+
+                width: 100%;
+
+                left: 0;
+
+                text-align: left;
+
+                padding:
+
+                    25px
+                    8px
+                    25px
+                    48px;
+
+                margin-bottom: 50px;
+            }
+
+
+            /* Coração lateral */
+
+            .evento::after,
+            .evento:nth-child(odd)::after,
+            .evento:nth-child(even)::after {
+
+                left: -2px;
+
+                right: auto;
+
+                top: 25px;
+
+                width: 36px;
+                height: 36px;
+            }
+
+
+            /* Texto */
+
+            .evento h2 {
+                font-size: 25px;
+
+                line-height: 1.25;
+            }
+
+            .evento p {
+                font-size: 14px;
+
+                line-height: 1.75;
+            }
+
+
+            /* Fotos */
+
+            .foto-vertical,
+            .foto-cinema {
+
+                width: 210px;
+
+                height: 315px;
+
+                margin-left: 0 !important;
+
+                margin-right: auto !important;
+            }
+
+
+            /* Frases */
+
+            .frase-especial,
+            .frase-gramado,
+            .pedido-frase {
+
+                font-size: 17px !important;
+            }
+
+
+            /* Final */
+
+            .final-area {
+                width: 92%;
+
+                margin-top: 0;
+
+                margin-bottom: 65px;
+
+                padding: 0 8px;
+            }
+
+            .final-historia {
+                padding: 45px 25px;
+
+                border-radius: 20px;
+            }
+
+            .final-historia h2 {
+                font-size: 28px;
+
+                line-height: 1.25;
+            }
+
+            .final-historia p {
+                font-size: 13.5px;
+
+                line-height: 1.8;
+            }
+
+            .final-historia .ultima-frase {
+                font-size: 17px;
+
+                line-height: 1.7;
+            }
+            
+            .btn-sofia {
+                font-size: 11px;
+                padding: 12px 28px;
+            }
+
+        }
+
+
+        /* ==================================================
+           CELULARES PEQUENOS
+        ================================================== */
+
+        @media (max-width: 380px) {
+
+            header h1 {
+                font-size: 37px;
+            }
+
+            .evento,
+            .evento:nth-child(odd),
+            .evento:nth-child(even) {
+
+                padding-left: 44px;
+            }
+
+            .foto-vertical,
+            .foto-cinema {
+
+                width: 190px;
+
+                height: 285px;
+            }
+
+            .final-historia {
+                padding: 40px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         CABEÇALHO
+    ================================================== -->
+
+    <header>
+
+        <div class="mini">
+            uma história que ainda está sendo escrita
+        </div>
+
+        <h1>
+            Nossa história ♡
+        </h1>
+
+        <p>
+            Alguns momentos passam. Outros ficam para sempre.
+        </p>
+
+        <div class="titulo-detalhe">
+            · · ·
+        </div>
+
+    </header>
+
+
+
+    <!-- ==================================================
+         LINHA DO TEMPO
+    ================================================== -->
+
+    <section class="timeline">
+
+
+        <!-- ==================================================
+             23 DE DEZEMBRO
+        ================================================== -->
+
+        <div class="evento">
+
+            <div class="data">
+                23 de dezembro
+            </div>
+
+            <h2>
+                Onde tudo começou
+            </h2>
+
+            <img
+                src="img/comeco.jpg"
+                alt="Uma lembrança especial"
+                class="foto-vertical"
+            >
+
+            <p>
+                Foi aqui que começou uma história que nenhum dos
+                dois imaginava onde iria chegar.
+            </p>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             07 DE JANEIRO
+        ================================================== -->
+
+        <div class="evento">
+
+            <div class="data">
+                07 de janeiro
+            </div>
+
+            <h2>
+                Nossa primeira ida ao cinema
+            </h2>
+
+            <img
+                src="img/zootopia.jpg"
+                alt="Nossa primeira ida ao cinema"
+                class="foto-cinema"
+            >
+
+            <p>
+                Nossa primeira ida ao cinema juntos.
+                Nesse dia também conheci sua mãe e suas irmãs.
+                Foi um daqueles dias simples, mas que acabou
+                se tornando uma lembrança muito especial para mim.
+            </p>
+
+            <p>
+                E ainda vimos Zootopia 2 juntos. ♡
+            </p>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             19 DE JANEIRO
+        ================================================== -->
+
+        <div class="evento evento-especial">
+
+            <div class="data">
+                19 de janeiro
+            </div>
+
+            <div class="detalhe-coracao">
+                ♡
+            </div>
+
+            <h2>
+                O nosso primeiro beijo
+            </h2>
+
+            <p>
+                19 de janeiro foi um daqueles dias que ficam
+                guardados de um jeito diferente.
+            </p>
+
+            <p>
+                Foi o dia do nosso primeiro beijo e também
+                a primeira vez que fui na sua casa.
+            </p>
+
+            <p>
+                Talvez naquele momento a gente ainda não
+                soubesse o quanto aquele dia seria importante,
+                mas hoje eu sei que foi mais um pedacinho
+                da nossa história começando a ser escrito.
+            </p>
+
+            <p class="frase-especial">
+                "E foi só o primeiro de tantos momentos
+                que ainda estavam por vir." ♡
+            </p>
+
+            <div class="pontinhos">
+                · · ·
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             01 DE MARÇO
+        ================================================== -->
+
+        <div class="evento evento-gramado">
+
+            <div class="data">
+                01 de março
+            </div>
+
+            <h2>
+                Um pedacinho da sua família
+            </h2>
+
+            <img
+                src="img/gramado.jpg"
+                alt="Nossa viagem para Gramado"
+                class="foto-vertical"
+            >
+
+            <p>
+                Nesse dia fui para Gramado com a sua família.
+            </p>
+
+            <p>
+                E foi muito mais especial do que eu poderia
+                imaginar. Eu me senti parte daquela família,
+                acolhido e feliz por estar vivendo aquele
+                momento junto com vocês.
+            </p>
+
+            <p class="frase-gramado">
+                Foi um daqueles dias em que eu percebi
+                que não estava apenas conhecendo lugares,
+                mas também fazendo parte de momentos
+                importantes da sua vida. ♡
+            </p>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             08 DE MARÇO
+        ================================================== -->
+
+        <div class="evento evento-pedido">
+
+            <div class="data">
+                08 de março
+            </div>
+
+            <div class="hora">
+                11:30
+            </div>
+
+            <h2>
+                O dia em que tudo mudou ♡
+            </h2>
+
+            <img
+                src="img/pedido.jpg"
+                alt="Um momento muito especial"
+                class="foto-vertical"
+            >
+
+            <p>
+                E então chegou o dia que fez a nossa história
+                ganhar um novo significado.
+            </p>
+
+            <p>
+                Às 11:30, aconteceu o nosso pedido de namoro.
+            </p>
+
+            <p class="pedido-frase">
+                Depois de tudo que já tínhamos vivido,
+                finalmente podíamos chamar aquilo de
+                <strong>nós.</strong>
+            </p>
+
+            <div class="coracoes">
+                ♡ &nbsp; ♡ &nbsp; ♡
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==================================================
+         FINAL
+         
+         FICA FORA DA TIMELINE
+         PARA NÃO TER LINHA ATRAVESSANDO
+    ================================================== -->
+
+    <section class="final-area">
+
+        <div class="final-historia">
+
+            <h2>
+                E isso é só o começo...
+            </h2>
+
+            <p>
+                Esse é só o começo de vários momentos especiais
+                que ainda vamos viver juntos.
+            </p>
+
+            <p>
+                Ficaria longo demais colocar todos eles aqui,
+                porque ainda existem muitos capítulos esperando
+                para serem escritos.
+            </p>
+
+            <p class="ultima-frase">
+                Então, por enquanto, é hora de seguir o rumo
+                para as próximas coisas que virão no seu site. ♡
+            </p>
+
+            <div class="final-coracao">
+                ✦ &nbsp; ♡ &nbsp; ✦
+            </div>
+            
+            <!-- BOTÃO ADICIONADO AQUI -->
+            <a href="sofia.html" class="btn-sofia">Continuar♡</a>
+
+        </div>
+
+    </section>
+
+
+</body>
+
+</html>

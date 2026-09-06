@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Uma música para nós ♡</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            color: #4a3b45;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #fff8fb 0%,
+                    #fdf0f5 45%,
+                    #f8e8ef 100%
+                );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px 15px;
+        }
+
+        /* DETALHES */
+
+        body::before {
+            content: "♡";
+
+            position: fixed;
+
+            top: 8%;
+            left: 8%;
+
+            font-size: 35px;
+
+            color: rgba(180, 119, 145, 0.25);
+
+            animation: flutuar 4s ease-in-out infinite;
+        }
+
+        body::after {
+            content: "♡";
+
+            position: fixed;
+
+            bottom: 10%;
+            right: 9%;
+
+            font-size: 28px;
+
+            color: rgba(180, 119, 145, 0.2);
+
+            animation: flutuar 5s ease-in-out infinite;
+        }
+
+        @keyframes flutuar {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+        }
+
+        /* CONTAINER */
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+
+            text-align: center;
+        }
+
+        .titulo {
+            font-size: 16px;
+
+            color: #a4778e;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 20px;
+        }
+
+        /* CARD */
+
+        .card {
+
+            background: rgba(255, 255, 255, 0.82);
+
+            border: 1px solid #ead3dc;
+
+            border-radius: 30px;
+
+            padding: 32px 28px;
+
+            box-shadow:
+                0 15px 40px rgba(111, 75, 94, 0.12);
+
+            position: relative;
+        }
+
+        .card::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 7px;
+
+            border: 1px solid rgba(234, 211, 220, 0.5);
+
+            border-radius: 24px;
+
+            pointer-events: none;
+        }
+
+        /* CAPA */
+
+        .capa {
+
+            width: 270px;
+            height: 270px;
+
+            object-fit: cover;
+
+            display: block;
+
+            margin: 0 auto 25px;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 12px 30px rgba(111, 75, 94, 0.2);
+
+            border: 3px solid white;
+        }
+
+        h1 {
+
+            font-size: 28px;
+
+            font-weight: normal;
+
+            color: #59414e;
+
+            margin-bottom: 6px;
+        }
+
+        .artista {
+
+            font-size: 15px;
+
+            color: #a4778e;
+
+            margin-bottom: 25px;
+        }
+
+        /* PLAYER */
+
+        .player {
+
+            position: relative;
+
+            z-index: 2;
+
+            padding: 20px;
+
+            background: #fff8fb;
+
+            border: 1px solid #ecd9e1;
+
+            border-radius: 20px;
+        }
+
+        /* BOTÃO PLAY */
+
+        .botao-play {
+
+            width: 62px;
+            height: 62px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #b77d97;
+
+            color: white;
+
+            font-size: 21px;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 20px;
+
+            box-shadow:
+                0 7px 18px rgba(183, 125, 151, 0.3);
+
+            transition: 0.25s;
+        }
+
+        .botao-play:hover {
+
+            transform: scale(1.06);
+
+            background: #a96d89;
+        }
+
+        .botao-play:active {
+
+            transform: scale(0.96);
+        }
+
+        /* BARRA */
+
+        .barra-container {
+
+            width: 100%;
+
+            height: 6px;
+
+            background: #ead9e1;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            overflow: hidden;
+        }
+
+        .barra {
+
+            width: 0%;
+
+            height: 100%;
+
+            background: #b77d97;
+
+            border-radius: 10px;
+        }
+
+        /* TEMPO */
+
+        .tempo {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 7px;
+
+            color: #aa8b9a;
+
+            font-size: 12px;
+        }
+
+        /* VOLUME */
+
+        .volume-area {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-top: 18px;
+        }
+
+        .volume-btn {
+
+            border: none;
+
+            background: transparent;
+
+            color: #8e6276;
+
+            font-size: 19px;
+
+            cursor: pointer;
+
+            width: 30px;
+        }
+
+        .volume-slider {
+
+            appearance: none;
+
+            width: 120px;
+
+            height: 5px;
+
+            background: #e5d2db;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            outline: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+
+            appearance: none;
+
+            width: 14px;
+            height: 14px;
+
+            border-radius: 50%;
+
+            background: #b77d97;
+
+            cursor: pointer;
+        }
+
+        .volume-slider::-moz-range-thumb {
+
+            width: 14px;
+            height: 14px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #b77d97;
+
+            cursor: pointer;
+        }
+
+        /* MENSAGEM */
+
+        .mensagem {
+
+            min-height: 18px;
+
+            margin-top: 15px;
+
+            font-size: 13px;
+
+            color: #a4778e;
+        }
+
+        /* FRASE */
+
+        .frase {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin-top: 27px;
+
+            color: #705a66;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+        }
+
+        .coracao {
+
+            margin-top: 20px;
+
+            color: #b77d97;
+
+            font-size: 21px;
+        }
+
+        /* BOTÃO PRÓXIMO */
+
+        .proximo {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: inline-block;
+
+            margin-top: 22px;
+
+            padding: 11px 22px;
+
+            border: 1px solid #dfc2ce;
+
+            border-radius: 30px;
+
+            color: #8e6276;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            background: rgba(255, 255, 255, 0.6);
+
+            transition: 0.25s;
+        }
+
+        .proximo:hover {
+
+            background: #fff;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 5px 15px rgba(111, 75, 94, 0.1);
+        }
+
+        /* CELULAR */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .card {
+                padding: 25px 18px;
+
+                border-radius: 25px;
+            }
+
+            .capa {
+
+                width: 220px;
+                height: 220px;
+
+                border-radius: 18px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .player {
+                padding: 17px;
+            }
+
+            .frase {
+                font-size: 15px;
+            }
+
+            .volume-slider {
+                width: 100px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <main class="container">
+
+        <div class="titulo">
+            uma música que me lembra você ♡
+        </div>
+
+
+        <section class="card">
+
+            <!-- CAPA DA MÚSICA -->
+
+            <img
+                src="img/love.jpg"
+                alt="Capa da música De Love"
+                class="capa"
+            >
+
+
+            <h1>De Love</h1>
+
+            <p class="artista">
+                1Kilo
+            </p>
+
+
+            <!-- PLAYER -->
+
+            <div class="player">
+
+                <button
+                    class="botao-play"
+                    id="playButton"
+                    type="button"
+                >
+                    ▶
+                </button>
+
+
+                <!-- PROGRESSO -->
+
+                <div
+                    class="barra-container"
+                    id="progressContainer"
+                >
+
+                    <div
+                        class="barra"
+                        id="progressBar"
+                    ></div>
+
+                </div>
+
+
+                <div class="tempo">
+
+                    <span id="currentTime">
+                        0:00
+                    </span>
+
+                    <span id="duration">
+                        0:00
+                    </span>
+
+                </div>
+
+
+                <!-- VOLUME -->
+
+                <div class="volume-area">
+
+                    <button
+                        class="volume-btn"
+                        id="volumeButton"
+                        type="button"
+                    >
+                        🔊
+                    </button>
+
+                    <input
+                        type="range"
+                        class="volume-slider"
+                        id="volumeSlider"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value="0.8"
+                    >
+
+                </div>
+
+
+                <p
+                    class="mensagem"
+                    id="message"
+                >
+                    clique no play para ouvir ♡
+                </p>
+
+            </div>
+
+
+            <!-- TEXTO -->
+
+            <p class="frase">
+
+                Algumas músicas são só músicas.
+
+                <br>
+
+                Outras acabam lembrando alguém.
+
+                <br><br>
+
+                Essa sempre vai me lembrar você.
+
+            </p>
+
+
+            <div class="coracao">
+                ♡
+            </div>
+
+
+            <a
+                href="carta.html"
+                class="proximo"
+            >
+                continuar nossa história →
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- ÁUDIO -->
+
+    <audio
+        id="audio"
+        preload="metadata"
+    >
+
+        <source
+            src="music/de-love.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+    <script>
+
+        const audio =
+            document.getElementById("audio");
+
+        const playButton =
+            document.getElementById("playButton");
+
+        const progressBar =
+            document.getElementById("progressBar");
+
+        const progressContainer =
+            document.getElementById("progressContainer");
+
+        const currentTime =
+            document.getElementById("currentTime");
+
+        const duration =
+            document.getElementById("duration");
+
+        const message =
+            document.getElementById("message");
+
+        const volumeSlider =
+            document.getElementById("volumeSlider");
+
+        const volumeButton =
+            document.getElementById("volumeButton");
+
+
+        /* VOLUME INICIAL */
+
+        audio.volume = 0.8;
+
+
+        /* FORMATAR TEMPO */
+
+        function formatTime(seconds) {
+
+            if (isNaN(seconds)) {
+                return "0:00";
+            }
+
+            const minutes =
+                Math.floor(seconds / 60);
+
+            const secs =
+                Math.floor(seconds % 60);
+
+            return minutes + ":" +
+                String(secs).padStart(2, "0");
+        }
+
+
+        /* PLAY / PAUSE */
+
+        playButton.addEventListener(
+            "click",
+            async () => {
+
+                try {
+
+                    if (audio.paused) {
+
+                        await audio.play();
+
+                        playButton.textContent = "❚❚";
+
+                        message.textContent =
+                            "tocando agora ♡";
+
+                    } else {
+
+                        audio.pause();
+
+                        playButton.textContent = "▶";
+
+                        message.textContent =
+                            "música pausada";
+
+                    }
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    message.textContent =
+                        "não foi possível tocar a música.";
+
+                }
+
+            }
+        );
+
+
+        /* PROGRESSO */
+
+        audio.addEventListener(
+            "timeupdate",
+            () => {
+
+                if (!audio.duration) {
+                    return;
+                }
+
+                const percentage =
+                    (audio.currentTime /
+                    audio.duration) * 100;
+
+                progressBar.style.width =
+                    percentage + "%";
+
+                currentTime.textContent =
+                    formatTime(audio.currentTime);
+
+            }
+        );
+
+
+        /* DURAÇÃO */
+
+        audio.addEventListener(
+            "loadedmetadata",
+            () => {
+
+                duration.textContent =
+                    formatTime(audio.duration);
+
+            }
+        );
+
+
+        /* CLICAR NA BARRA */
+
+        progressContainer.addEventListener(
+            "click",
+            (event) => {
+
+                if (!audio.duration) {
+                    return;
+                }
+
+                const width =
+                    progressContainer.clientWidth;
+
+                const position =
+                    event.offsetX;
+
+                const percentage =
+                    position / width;
+
+                audio.currentTime =
+                    percentage * audio.duration;
+
+            }
+        );
+
+
+        /* VOLUME */
+
+        volumeSlider.addEventListener(
+            "input",
+            () => {
+
+                audio.volume =
+                    volumeSlider.value;
+
+                if (audio.volume === 0) {
+
+                    volumeButton.textContent =
+                        "🔇";
+
+                } else if (audio.volume < 0.5) {
+
+                    volumeButton.textContent =
+                        "🔉";
+
+                } else {
+
+                    volumeButton.textContent =
+                        "🔊";
+
+                }
+
+            }
+        );
+
+
+        /* MUDO */
+
+        let volumeAnterior = 0.8;
+
+        volumeButton.addEventListener(
+            "click",
+            () => {
+
+                if (audio.volume > 0) {
+
+                    volumeAnterior =
+                        audio.volume;
+
+                    audio.volume = 0;
+
+                    volumeSlider.value = 0;
+
+                    volumeButton.textContent =
+                        "🔇";
+
+                } else {
+
+                    audio.volume =
+                        volumeAnterior;
+
+                    volumeSlider.value =
+                        volumeAnterior;
+
+                    volumeButton.textContent =
+                        "🔊";
+
+                }
+
+            }
+        );
+
+
+        /* TERMINOU */
+
+        audio.addEventListener(
+            "ended",
+            () => {
+
+                playButton.textContent = "▶";
+
+                progressBar.style.width = "0%";
+
+                currentTime.textContent = "0:00";
+
+                message.textContent =
+                    "terminou... ♡";
+
+            }
+        );
+
+
+        /* ERRO */
+
+        audio.addEventListener(
+            "error",
+            () => {
+
+                console.error(
+                    "Erro ao carregar a música:",
+                    audio.error
+                );
+
+                message.textContent =
+                    "não foi possível encontrar a música.";
+
+                playButton.disabled = true;
+
+            }
+        );
+
+
+        /* CARREGANDO */
+
+        audio.addEventListener(
+            "loadstart",
+            () => {
+
+                message.textContent =
+                    "carregando música...";
+
+            }
+        );
+
+
+        /* PRONTO */
+
+        audio.addEventListener(
+            "canplay",
+            () => {
+
+                message.textContent =
+                    "clique no play para ouvir ♡";
+
+                playButton.disabled = false;
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

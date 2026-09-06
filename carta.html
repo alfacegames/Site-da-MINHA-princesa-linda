@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Uma carta para você ♡</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #fffafd 0%,
+                    #fdf1f6 50%,
+                    #f8e8ef 100%
+                );
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            color: #4e3b45;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px 15px;
+
+            overflow-x: hidden;
+        }
+
+
+        /* CORAÇÕES */
+
+        .coracao {
+            position: fixed;
+
+            color: rgba(183, 125, 151, 0.25);
+
+            pointer-events: none;
+
+            animation: flutuar 5s ease-in-out infinite;
+        }
+
+        .c1 {
+            top: 12%;
+            left: 9%;
+            font-size: 32px;
+        }
+
+        .c2 {
+            bottom: 13%;
+            right: 9%;
+            font-size: 26px;
+
+            animation-delay: 1.5s;
+        }
+
+        .c3 {
+            top: 25%;
+            right: 15%;
+            font-size: 18px;
+
+            animation-delay: 2.5s;
+        }
+
+        @keyframes flutuar {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+
+        }
+
+
+        /* CONTAINER */
+
+        .container {
+            width: 100%;
+            max-width: 720px;
+
+            text-align: center;
+        }
+
+
+        /* TELA INICIAL */
+
+        .abertura {
+            animation: aparecer 1.2s ease;
+        }
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        .mini {
+            font-size: 15px;
+
+            color: #a4778e;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 15px;
+        }
+
+        .abertura h1 {
+            font-size: 35px;
+
+            font-weight: normal;
+
+            color: #59414e;
+
+            margin-bottom: 13px;
+        }
+
+        .abertura p {
+            color: #806875;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            max-width: 450px;
+
+            margin: 0 auto 30px;
+        }
+
+
+        /* BOTÃO */
+
+        .abrir {
+
+            border: 1px solid #d9b9c6;
+
+            background: rgba(255, 255, 255, 0.75);
+
+            color: #8e6276;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 15px;
+
+            padding: 13px 26px;
+
+            border-radius: 30px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 6px 20px rgba(111, 75, 94, 0.08);
+        }
+
+        .abrir:hover {
+
+            background: white;
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px rgba(111, 75, 94, 0.13);
+        }
+
+
+        /* CARTA */
+
+        .carta {
+
+            display: none;
+
+            position: relative;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fffdfb 0%,
+                    #fffaf8 100%
+                );
+
+            border: 1px solid #e7d3d8;
+
+            border-radius: 5px;
+
+            padding: 48px 50px;
+
+            text-align: left;
+
+            box-shadow:
+                0 18px 45px rgba(92, 61, 76, 0.15);
+
+            animation: abrirCarta 1.2s ease forwards;
+        }
+
+
+        @keyframes abrirCarta {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(30px)
+                    scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        /* LINHAS DO PAPEL */
+
+        .carta::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 10px;
+
+            border: 1px solid #eee0e3;
+
+            pointer-events: none;
+        }
+
+
+        /* DATA */
+
+        .data {
+
+            text-align: right;
+
+            color: #a4778e;
+
+            font-size: 13px;
+
+            margin-bottom: 30px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* TEXTO */
+
+        .texto {
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .texto p {
+
+            font-size: 17px;
+
+            line-height: 1.9;
+
+            margin-bottom: 22px;
+
+            opacity: 0;
+
+            animation: textoAparecer 0.8s ease forwards;
+        }
+
+
+        @keyframes textoAparecer {
+
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        .saudacao {
+
+            font-size: 21px !important;
+
+            color: #765668;
+
+        }
+
+
+        /* FRASE */
+
+        .citacao {
+
+            margin: 30px 5px;
+
+            padding: 18px 22px;
+
+            border-left: 2px solid #c898ac;
+
+            background: #fff6f9;
+
+            border-radius: 0 12px 12px 0;
+
+            color: #765668;
+
+            font-style: italic;
+
+            line-height: 1.7;
+
+            font-size: 16px;
+
+            opacity: 0;
+
+            animation: textoAparecer 0.8s ease forwards;
+        }
+
+
+        /* FINAL */
+
+        .assinatura {
+
+            margin-top: 40px;
+
+            text-align: right;
+
+            color: #765668;
+
+            font-size: 17px;
+
+            line-height: 1.8;
+
+            opacity: 0;
+
+            animation: textoAparecer 0.8s ease forwards;
+        }
+
+        .assinatura strong {
+
+            font-size: 19px;
+
+            font-weight: normal;
+        }
+
+
+        .fim {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #b77d97;
+
+            font-size: 22px;
+        }
+
+
+        /* PRÓXIMO */
+
+        .proximo {
+
+            display: none;
+
+            margin-top: 25px;
+        }
+
+        .proximo a {
+
+            display: inline-block;
+
+            padding: 12px 24px;
+
+            border: 1px solid #dfc2ce;
+
+            border-radius: 30px;
+
+            color: #8e6276;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            background: rgba(255,255,255,0.7);
+
+            transition: 0.25s;
+        }
+
+        .proximo a:hover {
+
+            background: white;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* CELULAR */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 25px 12px;
+            }
+
+            .abertura h1 {
+                font-size: 29px;
+            }
+
+            .carta {
+                padding: 38px 25px;
+            }
+
+            .texto p {
+                font-size: 16px;
+
+                line-height: 1.8;
+
+                text-align: left;
+            }
+
+            .citacao {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- CORAÇÕES -->
+
+    <div class="coracao c1">♡</div>
+    <div class="coracao c2">♡</div>
+    <div class="coracao c3">♡</div>
+
+
+    <main class="container">
+
+
+        <!-- PRIMEIRA TELA -->
+
+        <section
+            class="abertura"
+            id="abertura"
+        >
+
+            <p class="mini">
+                Tem umas coisinha que gostaria de te falar amor...
+            </p>
+
+            <h1>
+                algumas coisas<br>
+                especiais...
+            </h1>
+
+            <p>
+                Algumas coisas são difíceis de falar,
+                então achei melhor escrever.
+            </p>
+
+            <button
+                class="abrir"
+                onclick="abrirCarta()"
+            >
+                Abrir carta ♡
+            </button>
+
+        </section>
+
+
+        <!-- CARTA -->
+
+        <article
+            class="carta"
+            id="carta"
+        >
+
+            <div class="data">
+                27 de agosto de 2026
+            </div>
+
+
+            <div class="texto">
+
+
+                <p class="saudacao">
+                    Oii amor,
+                </p>
+
+
+                <p>
+                    Hoje é dia 27 de agosto de 2026 e faltam
+                    exatamente 12 dias, 10 horas e 40 minutos
+                    para fazermos seis meses de namoro.
+                </p>
+
+
+                <p>
+                    Eu estava pensando muito em você agora,
+                    enquanto via TikTok, onde já se viu né,
+                    uma da manhã e eu aqui sem dormir e
+                    apareceu pela 15ª vez um vídeo do Leon
+                    e da Nilce.
+                </p>
+
+
+                <p>
+                    Da Nilce falando que quando a gente ama
+                    alguém verdadeiramente, a gente quer ser
+                    melhor para ela todo dia, está disposto a
+                    sempre melhorar.
+                </p>
+
+
+                <p>
+                    E isso encaixa muito comigo.
+                </p>
+
+
+                <p>
+                    Pois eu quero ser todo dia alguém melhor para você,
+                    quero ser alguém que te faça feliz,
+                    quero ser alguém que te faça sorrir,
+                    quero ser alguém que te faça sentir amada e especial.
+                </p>
+
+
+                <p>
+                    Mas queria deixar uma frase aqui de Freud,
+                    sim ele mesmo akakakak:
+                </p>
+
+
+                <div class="citacao">
+
+                    “Um dia, em retrospecto, os anos de luta
+                    lhe parecerão os mais belo.”
+
+                    <br><br>
+
+                    Guarde como quiser, meu amor...
+
+                </div>
+
+
+                <p>
+                    Bom, 6 meses né, que loucura.
+                    Parece que já nos conhecemos faz séculos.
+                </p>
+
+
+                <p>
+                    Você mudou minha vida do avesso, melhorou
+                    minha vida num instante e quando percebi
+                    já te amava com todo meu coração.
+                </p>
+
+
+                <p>
+                    Você me mostrou nesses 6 meses/9 meses e
+                    18 dias, como ser alguém melhor, mais maduro,
+                    mais amável, uma pessoa melhor.
+                </p>
+
+
+                <p>
+                    Você é alguém que eu admiro e cada dia mais
+                    admiro mais essa pessoa que está do meu lado.
+                </p>
+
+
+                <p>
+                    Hoje faz 6 meses que oficializamos o nosso
+                    namoro, que eu te pedi em namoro e será o
+                    primeiro 6 meses de infinitos que virão.
+                </p>
+
+
+                <p>
+                    O CLJ trouxe você e muitas coisas a mais,
+                    como uma segunda família e um lugar para
+                    aprender mais sobre Deus.
+                </p>
+
+
+                <p>
+                    Você é a luz que me guia para a Luz e juntos
+                    vamos caminhar para viver eternamente juntos,
+                    lá no céu.
+                    
+                </p>
+
+
+                <!-- ASSINATURA -->
+
+                <div class="assinatura">
+
+                    Com carinho,
+
+                    <br>
+
+                    <strong>
+                        seu amoreco. ♡
+                    </strong>
+
+                </div>
+
+
+                <div class="fim">
+                    Feliz 6 meses, meu amor. ♡ <br>
+                    Shalom!
+                </div>
+
+
+            </div>
+
+        </article>
+
+
+        <!-- PRÓXIMA PÁGINA -->
+
+        <div
+            class="proximo"
+            id="proximo"
+        >
+
+            <a href="lugares.html">
+                continuar nossa história →
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+    <script>
+
+        function abrirCarta() {
+
+            const abertura =
+                document.getElementById("abertura");
+
+            const carta =
+                document.getElementById("carta");
+
+            const proximo =
+                document.getElementById("proximo");
+
+
+            /* SOME A INTRODUÇÃO */
+
+            abertura.style.animation =
+                "desaparecer 0.6s ease forwards";
+
+
+            setTimeout(() => {
+
+                abertura.style.display = "none";
+
+                carta.style.display = "block";
+
+                proximo.style.display = "block";
+
+
+                /* ANIMA CADA PARÁGRAFO */
+
+                const elementos =
+                    carta.querySelectorAll(
+                        ".texto p, .citacao, .assinatura"
+                    );
+
+
+                elementos.forEach(
+                    (elemento, index) => {
+
+                        elemento.style.animationDelay =
+                            (index * 0.35) + "s";
+
+                    }
+                );
+
+
+            }, 550);
+
+        }
+
+    </script>
+
+
+    <style>
+
+        @keyframes desaparecer {
+
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+
+        }
+
+    </style>
+
+
+</body>
+
+</html> 
